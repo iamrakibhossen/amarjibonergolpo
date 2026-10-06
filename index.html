@@ -1,0 +1,1387 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>আমার জীবনের হিসাব — Life Calculator Bangladesh</title>
+<meta name="description" content="আপনার জীবনের সময়, চা, মোবাইল, Social Media, যাতায়াত ও আয়ের মজার হিসাব বের করুন।">
+<meta name="theme-color" content="#1e3a8a">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="bn_BD">
+<meta property="og:site_name" content="আমার জীবনের হিসাব">
+<meta property="og:title" content="আমি জীবনে কত কাপ চা খেয়েছি জানেন? 😅 আপনারটা হিসাব করুন">
+<meta property="og:description" content="চা, ঘুম, Mobile, যাতায়াত — আর বাবা-মায়ের সাথে কতটা সময় বাকি। ১ মিনিটে আপনার জীবনের হিসাব। ❤️">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23006a4e'/%3E%3Ccircle cx='28' cy='32' r='14' fill='%23e5243b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-950:#081843; --blue-900:#0b1f5c; --blue-800:#13296b; --blue-700:#1e3a8a; --blue-600:#2547b8; --blue-500:#3b63e0; --blue-100:#dfe8ff; --blue-50:#eef3ff;
+  --green-700:#006a4e; --green-600:#0a8a5c; --green-500:#12b886; --green-100:#d3f5e6; --green-50:#ebfaf3;
+  --amber-600:#d97706; --amber-500:#f59e0b; --amber-100:#fdeccb; --amber-50:#fff8ea;
+  --orange-600:#ea580c; --orange-50:#fff3eb;
+  --indigo-600:#4f46e5; --indigo-50:#eef0ff;
+  --cyan-600:#0891b2; --cyan-50:#e6f8fc;
+  --rose-600:#e11d48; --rose-50:#fff0f3;
+  --fb:#1877f2;
+  --ink:#0f172a; --ink-2:#475569; --ink-3:#8392a7; --line:#e7ecf4; --bg:#f7f9fc; --card:#ffffff;
+  --r:20px; --r-lg:28px;
+  --sh-1:0 1px 2px rgba(15,23,42,.04),0 2px 8px rgba(15,23,42,.04);
+  --sh-2:0 2px 6px rgba(15,23,42,.04),0 12px 32px -8px rgba(30,58,138,.14);
+  --sh-3:0 24px 60px -18px rgba(11,31,92,.35);
+  --font:"Plus Jakarta Sans","Hind Siliguri",system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Bengali",sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--bg);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+button,input{font:inherit;color:inherit}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h3{line-height:1.3;letter-spacing:-.01em}
+:focus-visible{outline:3px solid var(--blue-500);outline-offset:3px;border-radius:8px}
+.wrap{width:100%;max-width:1040px;margin:0 auto;padding:0 16px}
+@media (min-width:640px){.wrap{padding:0 24px}}
+.num,.tnum{font-variant-numeric:tabular-nums}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:56px;padding:14px 28px;border:0;border-radius:999px;font-weight:700;font-size:1.1rem;cursor:pointer;text-decoration:none;transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s,opacity .2s;-webkit-tap-highlight-color:transparent;line-height:1.25;text-align:center}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn-primary{color:#fff;background:linear-gradient(135deg,var(--blue-600),var(--blue-800));box-shadow:0 10px 24px -8px rgba(37,71,184,.6),inset 0 1px 0 rgba(255,255,255,.18)}
+.btn-primary:not(:disabled):hover{box-shadow:0 14px 30px -8px rgba(37,71,184,.7),inset 0 1px 0 rgba(255,255,255,.18);transform:translateY(-1px)}
+.btn-fb{color:#fff;background:var(--fb);box-shadow:0 10px 24px -8px rgba(24,119,242,.6)}
+.btn-fb:hover{background:#0f66d9}
+.btn-green{color:#fff;background:linear-gradient(135deg,var(--green-500),var(--green-700));box-shadow:0 10px 24px -8px rgba(10,138,92,.55)}
+.btn-ghost{background:#fff;color:var(--blue-700);box-shadow:inset 0 0 0 1.5px var(--blue-100)}
+.btn-ghost:hover{background:var(--blue-50)}
+.btn-block{width:100%}
+.btn svg{width:20px;height:20px;flex:none}
+.btn .arrow{transition:transform .2s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;padding:56px 0 60px;text-align:center;background:
+  radial-gradient(60% 50% at 10% 0%,rgba(59,99,224,.14),transparent 70%),
+  radial-gradient(50% 45% at 100% 20%,rgba(18,184,134,.13),transparent 70%),
+  radial-gradient(50% 40% at 50% 100%,rgba(245,158,11,.10),transparent 70%),#fff}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(30,58,138,.09) 1px,transparent 1px);background-size:22px 22px;-webkit-mask-image:radial-gradient(70% 60% at 50% 40%,#000 30%,transparent 75%);mask-image:radial-gradient(70% 60% at 50% 40%,#000 30%,transparent 75%);pointer-events:none}
+.hero .wrap{position:relative}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:6px 14px 6px 8px;border-radius:999px;background:#fff;box-shadow:var(--sh-1),inset 0 0 0 1px var(--line);font-size:.9rem;font-weight:600;color:var(--ink-2)}
+.flag{width:30px;height:20px;border-radius:5px;flex:none;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.hero h1{margin:22px auto 0;font-size:clamp(2.5rem,10.5vw,4.6rem);font-weight:700;line-height:1.2;letter-spacing:-.02em;background:linear-gradient(120deg,var(--blue-800) 10%,var(--blue-600) 45%,var(--green-600) 95%);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+.hero .tagline{margin:14px auto 0;max-width:640px;font-size:clamp(1.25rem,4.6vw,1.65rem);font-weight:600}
+.hero .desc{margin:16px auto 0;max-width:600px;color:var(--ink-2);font-size:1.02rem}
+.hero .cta-row{margin-top:30px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.hero .cta-row .btn{width:100%;max-width:400px;font-size:1.15rem;min-height:60px}
+.trust{font-size:.92rem;color:var(--ink-3);font-weight:500}
+.chips{margin:36px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:640px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:16px;background:#fff;box-shadow:var(--sh-2);font-size:.95rem;font-weight:600;animation:float 6s ease-in-out infinite}
+.chip small{font-weight:500;color:var(--ink-3)}
+.chip:nth-child(2){animation-delay:-1.5s}.chip:nth-child(3){animation-delay:-3s}.chip:nth-child(4){animation-delay:-4.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero .alt{margin-top:22px;font-size:.95rem;color:var(--ink-3)}
+
+/* ---------- Sections ---------- */
+section{scroll-margin-top:12px}
+.sec{padding:56px 0}
+.sec-head{text-align:center;max-width:640px;margin:0 auto 28px}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green-600);background:var(--green-50);padding:4px 12px;border-radius:999px;margin-bottom:12px}
+.sec-head h2{font-size:clamp(1.6rem,6vw,2.3rem);font-weight:700}
+.sec-head p{margin-top:8px;color:var(--ink-2)}
+.card{background:var(--card);border-radius:var(--r-lg);box-shadow:var(--sh-2)}
+.note{font-size:.85rem;color:var(--ink-3);line-height:1.55}
+.fun-tag{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;color:var(--amber-600);background:var(--amber-50);padding:4px 10px;border-radius:999px;line-height:1.45}
+
+/* ---------- Quiz ---------- */
+#form-sec{background:linear-gradient(180deg,#fff 0,var(--bg) 120px);padding-top:48px}
+.quiz{max-width:620px;margin:0 auto;padding:18px 16px 22px;overflow:hidden}
+@media (min-width:640px){.quiz{padding:24px 32px 30px}}
+.q-top{display:flex;align-items:center;gap:12px}
+.q-back{width:42px;height:42px;flex:none;border:0;border-radius:13px;background:var(--blue-50);color:var(--blue-700);font-size:1.25rem;font-weight:700;cursor:pointer;transition:opacity .2s}
+.q-back:disabled{opacity:.3;cursor:default}
+.q-top .track{flex:1;height:8px;border-radius:99px;background:var(--blue-50);overflow:hidden}
+.q-top .track i{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--blue-500),var(--green-500));transition:width .45s var(--ease)}
+.q-top .cnt{font-size:.88rem;font-weight:700;color:var(--ink-2);min-width:38px;text-align:right}
+.q{padding-top:22px;animation:qIn .45s var(--ease)}
+.q.back{animation-name:qBack}
+@keyframes qIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes qBack{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+.q-ic{width:68px;height:68px;margin:0 auto;border-radius:22px;display:grid;place-items:center;font-size:2.1rem;background:linear-gradient(135deg,var(--blue-50),var(--green-50))}
+.q-title{margin-top:14px;text-align:center;font-size:clamp(1.35rem,5.6vw,1.8rem);font-weight:700;outline:none}
+.q-sub{margin-top:6px;text-align:center;color:var(--ink-2);font-size:.98rem}
+.opts{margin-top:20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.opts.wide{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (min-width:520px){.opts.wide{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.opts.list{grid-template-columns:1fr}
+@media (min-width:520px){.opts.list{grid-template-columns:1fr 1fr}}
+.opt{min-height:60px;padding:10px 6px;border:0;border-radius:16px;background:#f5f7fb;box-shadow:inset 0 0 0 1.5px var(--line);font-weight:700;font-size:1.15rem;line-height:1.2;cursor:pointer;transition:background .15s,box-shadow .15s,transform .15s,color .15s;-webkit-tap-highlight-color:transparent;min-width:0;overflow-wrap:anywhere}
+.opt small{display:block;margin-top:2px;font-size:.72rem;font-weight:500;color:var(--ink-3)}
+.opts.wide .opt,.opts.list .opt{font-size:1rem;padding:12px 14px}
+.opt:hover{background:var(--blue-50)}
+.opt:active{transform:scale(.96)}
+.opt[aria-checked="true"]{color:#fff;background:linear-gradient(135deg,var(--blue-600),var(--blue-800));box-shadow:0 8px 18px -8px rgba(37,71,184,.6)}
+.opt[aria-checked="true"] small{color:rgba(255,255,255,.78)}
+.q-sublabel{margin-top:22px;font-weight:700;font-size:1rem}
+.q-sublabel+.opts{margin-top:10px}
+.inp{display:flex;align-items:center;min-height:58px;border-radius:16px;background:#f5f7fb;box-shadow:inset 0 0 0 1.5px var(--line);transition:box-shadow .2s,background .2s;overflow:hidden}
+.inp:focus-within{background:#fff;box-shadow:inset 0 0 0 2px var(--blue-500),0 0 0 4px rgba(59,99,224,.12)}
+.q.bad .inp{box-shadow:inset 0 0 0 2px var(--rose-600);background:var(--rose-50)}
+.inp input{flex:1;min-width:0;width:100%;border:0;background:transparent;padding:14px 16px;font-size:18px;font-weight:600;outline:none}
+.inp input::placeholder{color:#a3b0c2;font-weight:500}
+.inp .pre{padding-left:16px;font-weight:700;color:var(--ink-2)}
+.inp .pre+input{padding-left:6px}
+.inp .unit{padding-right:14px;font-size:.9rem;color:var(--ink-3);font-weight:500;white-space:nowrap}
+.big-inp{margin-top:22px}
+.big-inp .inp{min-height:64px}
+.big-inp input{text-align:center;font-size:22px}
+.custom{margin-top:8px;display:flex;gap:10px;align-items:stretch}
+.custom .inp{flex:1;min-height:52px}
+.custom .inp input{font-size:17px;padding:10px 14px}
+.custom .btn{min-height:52px;padding:10px 18px;font-size:1rem;flex:none}
+.custom-lbl{margin-top:16px;font-size:.86rem;color:var(--ink-3);font-weight:600;text-align:center}
+.err{display:none;margin-top:10px;text-align:center;font-size:.9rem;font-weight:600;color:var(--rose-600)}
+.q.bad .err{display:block}
+.react{min-height:1.7em;margin-top:14px;text-align:center;font-weight:700;color:var(--green-600);font-size:1.02rem;opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
+.react.show{opacity:1;transform:none}
+.q-foot{margin-top:14px;display:grid;gap:6px}
+.q-foot .btn{min-height:58px}
+.skip{justify-self:center;background:none;border:0;padding:10px;color:var(--ink-3);font-weight:600;font-size:.92rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.privacy{margin-top:16px;text-align:center;font-size:.84rem;color:var(--ink-3)}
+
+/* ---------- Loader ---------- */
+.loader{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:24px;background:rgba(247,249,252,.82);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.loader.show{opacity:1;visibility:visible}
+.loader-box{width:100%;max-width:340px;text-align:center;padding:30px 24px;background:#fff;border-radius:var(--r-lg);box-shadow:var(--sh-3)}
+.loader .cup{font-size:3rem;display:inline-block;animation:bob 1.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-6px) rotate(4deg)}}
+.loader h3{margin-top:10px;font-size:1.25rem}
+.loader p{margin-top:4px;color:var(--ink-2);min-height:1.6em}
+.loader .track{margin-top:18px;height:8px;border-radius:99px;background:var(--blue-50);overflow:hidden}
+.loader .track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue-500),var(--green-500));border-radius:inherit}
+.loader.show .track i{animation:fill 2s var(--ease) forwards}
+@keyframes fill{to{width:100%}}
+
+/* ---------- Report ---------- */
+.res-hero{padding:56px 0 8px;text-align:center}
+.res-hero .confetti{font-size:2.6rem;line-height:1}
+.res-hero h2{margin-top:10px;font-size:clamp(1.7rem,6.4vw,2.6rem);font-weight:700;outline:none}
+.who{margin:22px auto 0;display:inline-flex;flex-direction:column;align-items:center;gap:4px;padding:16px 28px;border-radius:22px;background:#fff;box-shadow:var(--sh-2);max-width:100%}
+.who h3{font-size:clamp(1.3rem,5vw,1.7rem);font-weight:700;color:var(--blue-800);overflow-wrap:anywhere}
+.who span{color:var(--ink-2);font-weight:500;overflow-wrap:anywhere}
+.assume{margin:14px auto 0;max-width:560px}
+.stats{display:grid;grid-template-columns:1fr;gap:14px;margin-top:30px}
+@media (min-width:560px){.stats{grid-template-columns:1fr 1fr;gap:18px}}
+.stat{position:relative;padding:22px 20px 20px;border-radius:var(--r-lg);background:#fff;box-shadow:var(--sh-2);overflow:hidden;min-width:0}
+.stat::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:var(--tint);opacity:.7;pointer-events:none}
+.stat-top{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.stat .si{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:1.4rem;background:var(--tint);flex:none}
+.stat h3{font-size:1.05rem;font-weight:700;color:var(--ink-2)}
+.stat .big{position:relative;z-index:1;margin-top:14px;display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;line-height:1.1}
+.stat .big .v{font-size:clamp(2.3rem,10vw,2.9rem);font-weight:800;letter-spacing:-.03em;color:var(--fg)}
+.stat .big .u{font-size:1.15rem;font-weight:700}
+.stat .sub{position:relative;z-index:1;margin-top:6px;color:var(--ink-2);font-size:.98rem}
+.stat .extra{position:relative;z-index:1;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:.92rem;font-weight:500}
+.stat .extra b{color:var(--fg)}
+.bar{height:6px;border-radius:99px;background:#f0f3f8;overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:inherit;background:var(--fg,var(--blue-600));transition:width 1.2s var(--ease);transition-delay:var(--d,.2s)}
+.anim.in .bar i{width:var(--w)}
+.stat .bar{margin-top:10px}
+.stat .warn{position:relative;z-index:1;margin-top:10px;font-size:.8rem;color:var(--ink-3);line-height:1.5}
+.t-amber{--tint:var(--amber-50);--fg:var(--amber-600)}
+.t-blue{--tint:var(--blue-50);--fg:var(--blue-600)}
+.t-orange{--tint:var(--orange-50);--fg:var(--orange-600)}
+.t-indigo{--tint:var(--indigo-50);--fg:var(--indigo-600)}
+.t-cyan{--tint:var(--cyan-50);--fg:var(--cyan-600)}
+.t-green{--tint:var(--green-50);--fg:var(--green-600)}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:var(--d,0s)}
+.in .rv{opacity:1;transform:none}
+
+/* ---------- Discoveries ---------- */
+.disc{display:grid;gap:14px}
+@media (min-width:640px){.disc{grid-template-columns:1fr 1fr}}
+.disc-item{display:flex;gap:14px;align-items:flex-start;padding:20px 18px;border-radius:var(--r);background:#fff;box-shadow:var(--sh-2)}
+.disc-item .e{font-size:1.9rem;line-height:1;flex:none;width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:var(--tint,var(--amber-50))}
+.disc-item p{font-weight:600;font-size:1.02rem;line-height:1.55}
+.disc-item small{display:block;margin-top:4px;font-weight:500;color:var(--ink-3);font-size:.8rem}
+
+/* ---------- Score ---------- */
+.score-card{padding:28px 18px;text-align:center}
+@media (min-width:720px){.score-card{padding:40px}}
+.score-top{display:grid;gap:24px;align-items:center}
+@media (min-width:720px){.score-top{grid-template-columns:260px 1fr;text-align:left}}
+.ring{position:relative;width:220px;max-width:100%;aspect-ratio:1;margin:0 auto}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .bg{fill:none;stroke:#eef2f8;stroke-width:14}
+.ring .fg{fill:none;stroke:url(#ringGrad);stroke-width:14;stroke-linecap:round;stroke-dasharray:339.3;stroke-dashoffset:339.3;transition:stroke-dashoffset 1.5s var(--ease) .15s}
+.in .ring .fg{stroke-dashoffset:var(--off)}
+.ring .center{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring .center b{font-size:4rem;font-weight:800;line-height:1;color:var(--blue-800);letter-spacing:-.04em}
+.ring .center .of{font-size:1rem;color:var(--ink-3);font-weight:600}
+.persona{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:linear-gradient(135deg,var(--green-50),var(--amber-50));box-shadow:inset 0 0 0 1.5px var(--green-100);font-weight:800;font-size:1.2rem;color:var(--green-700)}
+.score-top h3{margin-top:14px;font-size:1.35rem}
+.score-top p{margin-top:6px;color:var(--ink-2)}
+.cats{margin-top:28px;display:grid;gap:12px;text-align:left}
+@media (min-width:640px){.cats{grid-template-columns:1fr 1fr;gap:14px 20px}}
+.cat{padding:14px 16px;border-radius:16px;background:#f8fafd}
+.cat-row{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.cat-row b{font-weight:700;font-size:.98rem}
+.cat-row span{font-weight:800;color:var(--blue-700)}
+.cat .bar{margin-top:8px;height:8px;background:#e9eef6}
+.cat .bar i{background:linear-gradient(90deg,var(--blue-500),var(--green-500))}
+.cat small{display:block;margin-top:6px;color:var(--ink-3);font-size:.84rem}
+.disclaimer{margin-top:22px;display:inline-flex;gap:8px;align-items:flex-start;text-align:left;padding:10px 14px;border-radius:14px;background:var(--amber-50);color:#92400e;font-size:.86rem;font-weight:500;line-height:1.5}
+
+/* ---------- Day + compare ---------- */
+.donut-card{padding:24px 18px;display:grid;gap:24px;align-items:center}
+@media (min-width:720px){.donut-card{grid-template-columns:300px 1fr;padding:36px;gap:40px}}
+.donut{position:relative;width:min(100%,280px);margin:0 auto;aspect-ratio:1}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg)}
+.donut .seg{fill:none;stroke-width:22;stroke-dasharray:0 440;transition:stroke-dasharray 1.1s var(--ease);transition-delay:var(--d,0s)}
+.in .donut .seg{stroke-dasharray:var(--len) var(--rest)}
+.donut .base{fill:none;stroke:#f0f3f8;stroke-width:22}
+.donut .center{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.donut .center b{font-size:2.2rem;font-weight:800;color:var(--blue-800);line-height:1.1}
+.donut .center span{font-size:.9rem;color:var(--ink-2)}
+.legend{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.legend li{display:grid;grid-template-columns:14px 1fr auto;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:#f8fafd}
+.legend .dot{width:14px;height:14px;border-radius:5px;background:var(--c)}
+.legend .nm{font-weight:600;line-height:1.3;min-width:0}
+.legend .nm small{display:block;font-weight:500;color:var(--ink-3);font-size:.82rem}
+.legend .pc{font-weight:800;font-size:1.15rem}
+.insight{margin-top:16px;padding:14px 16px;border-radius:14px;background:var(--blue-50);color:var(--blue-800);font-weight:600;font-size:.96rem}
+.cmp-card{margin-top:18px;padding:22px 18px}
+@media (min-width:720px){.cmp-card{padding:30px 36px}}
+.cmp-card>h3{font-size:1.3rem;margin-bottom:8px}
+.cmp-list{margin-top:16px;display:grid;gap:10px}
+@media (min-width:720px){.cmp-list{grid-template-columns:1fr 1fr}}
+.cmp-row{padding:14px 16px;border-radius:16px;background:#f8fafd}
+.cmp-row b{font-weight:700}
+.cmp-row .nums{display:block;font-size:.86rem;color:var(--ink-3);margin-top:2px}
+.cmp-row .res{display:block;margin-top:6px;font-weight:600;font-size:.95rem}
+
+/* ---------- Emotional ---------- */
+.moment{position:relative;overflow:hidden;color:#fff;background:radial-gradient(70% 50% at 85% 0%,rgba(18,184,134,.26),transparent 60%),radial-gradient(60% 40% at 0% 60%,rgba(59,99,224,.3),transparent 60%),linear-gradient(170deg,var(--blue-950),var(--blue-900) 55%,#0a2a3f)}
+.moment .sec-head h2{color:#fff}
+.moment .eyebrow{background:rgba(255,255,255,.1);color:#9be8c9}
+.big3{display:grid;gap:4px;text-align:center;margin:8px 0 36px}
+.big3 div{font-size:clamp(2.4rem,11vw,4.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.15}
+.big3 div .u{font-size:.42em;font-weight:600;color:rgba(255,255,255,.65);letter-spacing:0;margin-left:.2em}
+.big3 div:nth-child(2){color:#bfe9ff}.big3 div:nth-child(3){color:#9be8c9}
+.m-block{max-width:640px;margin:0 auto}
+.m-block+.m-block{margin-top:52px}
+.m-block>h3{text-align:center;font-size:clamp(1.25rem,5vw,1.6rem);font-weight:700}
+.m-block>.m-sub{text-align:center;color:rgba(255,255,255,.62);font-size:.9rem;margin-top:4px}
+.life-list{margin-top:18px;display:grid;gap:10px}
+.ll{display:grid;grid-template-columns:1fr auto;gap:6px 12px;padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+.ll b{font-weight:600}
+.ll span{font-weight:800}
+.ll .bar{grid-column:1/-1;background:rgba(255,255,255,.08)}
+.ll .bar i{background:var(--c,#9be8c9)}
+.ll.me{background:linear-gradient(135deg,rgba(18,184,134,.22),rgba(18,184,134,.08));box-shadow:inset 0 0 0 1px rgba(155,232,201,.35)}
+.ll small{grid-column:1/-1;color:rgba(255,255,255,.55);font-size:.8rem;line-height:1.4}
+.moment .note{color:rgba(255,255,255,.55);text-align:center;margin-top:12px}
+.cal{margin:20px auto 0;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px;max-width:420px}
+.cal i{aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);transform:scale(.4);opacity:0;transition:transform .5s var(--ease),opacity .5s;transition-delay:var(--d,0s)}
+.in .cal i{transform:none;opacity:1}
+.cal i.l{background:linear-gradient(135deg,#7ee0f0,#9be8c9);box-shadow:none}
+.cal i.bonus{background:#ffb27a}
+.cal i.now{background:#ffd27a;box-shadow:0 0 0 4px rgba(255,210,122,.25);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(255,210,122,.08)}}
+.cal-legend{margin-top:14px;display:flex;justify-content:center;flex-wrap:wrap;gap:6px 16px;font-size:.82rem;color:rgba(255,255,255,.65)}
+.cal-legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:var(--c)}
+.cal-msg{margin-top:16px;text-align:center;font-size:1.08rem;font-weight:600}
+.cal-msg b{color:#9be8c9}
+.ahead{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ah{padding:16px 12px;border-radius:18px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);text-align:center;min-width:0}
+.ah .e{font-size:1.6rem;line-height:1}
+.ah b{display:block;margin-top:6px;font-size:clamp(1.3rem,6vw,1.6rem);font-weight:800;letter-spacing:-.02em}
+.ah span{font-size:.86rem;color:rgba(255,255,255,.7)}
+.ahead-msg{margin-top:14px;text-align:center;color:rgba(255,255,255,.75);font-size:.98rem}
+.parents{margin-top:18px;padding:26px 20px;border-radius:24px;text-align:center;background:linear-gradient(160deg,rgba(255,255,255,.12),rgba(255,255,255,.04));box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+.parents .heart{font-size:2.2rem;line-height:1}
+.parents .pbig{margin-top:8px;font-size:clamp(2.6rem,12vw,3.6rem);font-weight:800;line-height:1.1;color:#ffd6e0;letter-spacing:-.03em}
+.parents .pbig small{font-size:.4em;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:0}
+.parents .plbl{margin-top:12px;font-weight:600;color:rgba(255,255,255,.85)}
+.parents .bar{margin:20px auto 0;max-width:420px;height:10px;background:rgba(255,255,255,.1)}
+.parents .bar i{background:linear-gradient(90deg,#ffb4c6,#ffd27a)}
+.parents .pct{margin-top:12px;font-size:1.02rem;font-weight:600;line-height:1.55}
+.parents .pct b{color:#ffd27a}
+.parents .soft{margin-top:14px;font-size:1.02rem;line-height:1.7;color:rgba(255,255,255,.88)}
+.parents .call{margin-top:16px;display:inline-flex;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,.12);font-weight:700}
+.parents .note{margin-top:12px}
+.quote{text-align:center;margin-top:56px}
+.quote h3{font-size:clamp(1.45rem,5.6vw,2.1rem);font-weight:700}
+.quote p{margin-top:10px;color:rgba(255,255,255,.7)}
+
+/* ---------- Share ---------- */
+.share-wrap{display:grid;gap:28px;align-items:start;justify-items:center}
+.share-wrap>*{min-width:0}
+@media (min-width:860px){.share-wrap{grid-template-columns:420px 1fr;justify-items:stretch}}
+.lcard{container-type:inline-size;width:100%;max-width:420px;aspect-ratio:4/5;border-radius:28px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--sh-3);background:radial-gradient(60% 45% at 95% 5%,rgba(18,184,134,.45),transparent 70%),radial-gradient(55% 40% at 0% 100%,rgba(245,158,11,.28),transparent 70%),linear-gradient(155deg,#0b1f5c,#1e3a8a 55%,#0b5d47);display:flex;flex-direction:column;padding:7.4cqw}
+.lc-brand{display:flex;align-items:center;gap:2.6cqw;font-weight:600;font-size:3.9cqw}
+.lc-brand .flag{width:6.6cqw;height:4.4cqw;border-radius:1cqw}
+.lc-name{margin-top:4.6cqw;font-size:8cqw;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-meta{margin-top:.4cqw;font-size:3.7cqw;opacity:.78;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-grid{margin-top:3.6cqw;display:grid;grid-template-columns:1fr 1fr;gap:2.4cqw}
+.lc-s{padding:2.8cqw 3.4cqw;border-radius:4cqw;background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);min-width:0}
+.lc-s .e{font-size:4.2cqw;line-height:1}
+.lc-s b{display:block;margin-top:1.2cqw;font-size:5cqw;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-s span{display:block;font-size:2.9cqw;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-score{margin-top:2.8cqw;display:flex;align-items:center;justify-content:space-between;gap:3cqw;padding:3cqw 4.2cqw;border-radius:4.2cqw;background:rgba(255,255,255,.96);color:var(--ink)}
+.lc-score small{display:block;font-size:2.5cqw;font-weight:700;letter-spacing:.1em;color:#64748b}
+.lc-score .sv{font-size:9.6cqw;font-weight:800;line-height:1;color:var(--blue-700);letter-spacing:-.03em}
+.lc-score .sv span{font-size:3.9cqw;color:#94a3b8;font-weight:700;letter-spacing:0}
+.lc-score .pr{text-align:right;min-width:0}
+.lc-score .pr small{letter-spacing:0;font-weight:600;font-size:2.7cqw}
+.lc-score .pr b{display:block;font-size:4.2cqw;color:var(--green-700);font-weight:800;line-height:1.25}
+.lc-life{margin-top:4cqw}
+.lc-life p{font-size:3.2cqw;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-life .lb{margin-top:1.4cqw;height:1.3cqw;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden}
+.lc-life .lb i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7ee0f0,#9be8c9)}
+.lc-quote{margin-top:auto;text-align:center;font-size:3.3cqw;opacity:.9;font-weight:500;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lc-url{margin-top:1cqw;text-align:center;font-size:2.8cqw;opacity:.6;font-weight:600}
+.share-side{width:100%;max-width:420px}
+@media (min-width:860px){.share-side{max-width:none}}
+.share-side h3{font-size:1.45rem}
+.share-side>p{margin-top:6px;color:var(--ink-2)}
+.share-btns{margin-top:20px;display:grid;gap:12px}
+.share-mini{margin-top:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.share-mini .btn{min-height:48px;font-size:.92rem;padding:10px 8px;gap:6px}
+.share-mini svg{width:18px;height:18px}
+@media (max-width:359px){.share-mini{gap:8px}.share-mini svg{display:none}.share-mini .btn{font-size:.86rem;padding:10px 4px}}
+.tag-hint{margin-top:16px;padding:12px 14px;border-radius:14px;background:var(--amber-50);color:#92400e;font-weight:600;font-size:.94rem}
+.caption{margin-top:14px;border-radius:18px;background:#fff;box-shadow:var(--sh-1),inset 0 0 0 1px var(--line);overflow:hidden}
+.caption-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);font-weight:700;font-size:.92rem}
+.caption-h button{border:0;background:var(--blue-50);color:var(--blue-700);font-weight:700;font-size:.85rem;padding:6px 14px;border-radius:999px;cursor:pointer}
+.caption textarea{display:block;width:100%;min-height:210px;border:0;padding:12px 14px;font:inherit;font-size:16px;line-height:1.55;resize:vertical;color:var(--ink);background:#fff;outline:none}
+.steps-hint{margin-top:12px;font-size:.86rem;color:var(--ink-3);line-height:1.6}
+
+.again{padding:8px 0 64px;text-align:center}
+.again-box{max-width:620px;margin:0 auto;padding:28px 20px;border-radius:var(--r-lg);background:#fff;box-shadow:var(--sh-2)}
+.again-box h3{font-size:1.3rem}
+.again-box p{margin-top:6px;color:var(--ink-2)}
+.again-btns{margin-top:18px;display:grid;gap:10px}
+@media (min-width:560px){.again-btns{grid-template-columns:1fr 1fr}}
+
+footer{padding:36px 0 48px;text-align:center;border-top:1px solid var(--line);background:#fff}
+footer p{color:var(--ink-3);font-size:.88rem;max-width:620px;margin:0 auto}
+footer .brand{font-weight:700;font-size:1rem;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:8px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(180deg,rgba(247,249,252,0),rgba(247,249,252,.95) 30%);transform:translateY(110%);transition:transform .35s var(--ease);pointer-events:none}
+.sticky.show{transform:none}
+.sticky .btn{width:100%;pointer-events:auto;min-height:54px}
+@media (min-width:860px){.sticky{display:none}}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));z-index:70;transform:translate(-50%,20px);width:max-content;max-width:calc(100% - 32px);padding:12px 18px;border-radius:14px;background:var(--ink);color:#fff;font-weight:500;font-size:.95rem;box-shadow:var(--sh-3);opacity:0;visibility:hidden;transition:all .3s var(--ease);text-align:center}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="flag" viewBox="0 0 30 20"><rect width="30" height="20" rx="3" fill="#006a4e"/><circle cx="13.5" cy="10" r="6" fill="#e5243b"/></symbol>
+    <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b63e0"/><stop offset="1" stop-color="#12b886"/></linearGradient>
+  </defs>
+</svg>
+
+<main>
+  <header class="hero" id="top">
+    <div class="wrap">
+      <span class="pill"><svg class="flag" aria-label="বাংলাদেশের পতাকা" role="img"><use href="#flag"/></svg>My Life, By The Numbers</span>
+      <h1>আমার জীবনের হিসাব</h1>
+      <p class="tagline">জীবনটা কেমন কাটালেন? এবার হিসাব করে দেখুন।</p>
+      <p class="desc">জন্মের পর থেকে আজ পর্যন্ত—আপনি কত কাপ চা খেয়েছেন, কত সময় ঘুমিয়েছেন, রাস্তায় কতদিন কাটিয়েছেন, আর ফোনে কত বছর দিয়েছেন—সবকিছুর একটা মজার হিসাব।</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#form-sec" id="heroCta">আমার জীবনের হিসাব করুন <span class="arrow" aria-hidden="true">→</span></a>
+        <p class="trust">ফ্রি • ১ মিনিট • কোনো signup লাগবে না</p>
+      </div>
+      <div class="chips" aria-hidden="true">
+        <span class="chip">☕ 18,420 <small>কাপ চা</small></span>
+        <span class="chip">📱 7.1 <small>বছর ফোনে</small></span>
+        <span class="chip">🚌 1.4 <small>বছর রাস্তায়</small></span>
+        <span class="chip">🤍 ? <small>দিন মা-বাবার সাথে</small></span>
+      </div>
+      <p class="alt">আপনার জীবনের গল্পটা সংখ্যায় দেখলে কেমন হয়?</p>
+    </div>
+  </header>
+
+  <section class="sec" id="form-sec" aria-labelledby="form-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">শুধু Tap করুন</span>
+        <h2 id="form-title">আপনার সম্পর্কে একটু বলুন</h2>
+        <p>কিছু তথ্য দিলেই আমরা আপনার Life Report তৈরি করে দেব।</p>
+      </div>
+      <form class="card quiz" id="lifeForm" novalidate autocomplete="off">
+        <div class="q-top">
+          <button type="button" class="q-back" id="qBack" aria-label="আগের প্রশ্ন" disabled>←</button>
+          <div class="track" aria-hidden="true"><i id="progBar"></i></div>
+          <span class="cnt tnum" id="progTxt">1/11</span>
+        </div>
+        <div id="qStage"></div>
+        <p class="privacy">🔒 আপনার কোনো তথ্য কোথাও সেভ বা পাঠানো হয় না</p>
+      </form>
+    </div>
+  </section>
+
+  <div id="results" hidden></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><svg class="flag" aria-hidden="true"><use href="#flag"/></svg>আমার জীবনের হিসাব</div>
+    <p>সব হিসাব মজার আনুমানিক — কোনো বৈজ্ঞানিক, স্বাস্থ্য বা আর্থিক মূল্যায়ন নয়। আপনার দেওয়া তথ্য শুধু আপনার browser-এই থাকে; কোথাও সেভ বা পাঠানো হয় না।</p>
+  </div>
+</footer>
+
+<div class="sticky" id="sticky" aria-hidden="true"><a class="btn btn-primary" href="#form-sec" id="stickyBtn" tabindex="-1">✨ আমার জীবনের হিসাব করুন</a></div>
+<div class="loader" id="loader" role="status" aria-live="polite">
+  <div class="loader-box">
+    <div class="cup" aria-hidden="true">☕</div>
+    <h3>হিসাব চলছে…</h3>
+    <p id="loaderMsg">চায়ের কাপ গুনছি</p>
+    <div class="track"><i></i></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ================= Helpers ================= */
+var $ = function(s, r){ return (r || document).querySelector(s); };
+var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+var CY = new Date().getFullYear();
+var DY = 365.25, HY = 24 * DY;
+var LIFE = 73;     // approx. Bangladesh life expectancy (fun estimate)
+var LIFE_P = 78;   // parents are already older, so a slightly higher estimate (fun estimate)
+var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var BN = '০১২৩৪৫৬৭৮৯';
+
+function clamp(n, a, b){ return Math.min(b, Math.max(a, n)); }
+function safe(n){ return (typeof n === 'number' && isFinite(n)) ? n : 0; }
+function isNum(x){ return typeof x === 'number' && isFinite(x); }
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function fmt(n, dec){ dec = dec || 0; return safe(n).toLocaleString('en-US', {minimumFractionDigits: dec, maximumFractionDigits: dec}); }
+function fmtH(n){ return fmt(n, n % 1 ? 1 : 0); }
+function toAscii(s){ return String(s == null ? '' : s).replace(/[০-৯]/g, function(d){ return BN.indexOf(d); }).replace(/[,\s৳]/g, ''); }
+function parseNum(s){
+  var t = toAscii(s).trim();
+  if (t === '') return null;
+  if (!/^\d+(\.\d+)?$|^\.\d+$|^\d+\.$/.test(t)) return NaN;
+  var n = parseFloat(t);
+  return isFinite(n) ? n : NaN;
+}
+function dur(h){
+  h = Math.max(0, safe(h));
+  var y = h / HY;
+  if (y >= 0.995) return {n: y, dec: 1, unit: 'বছর', en: 'Years'};
+  var d = h / 24;
+  if (d >= 30.44) return {n: d / 30.44, dec: 1, unit: 'মাস', en: 'Months'};
+  if (d >= 1) return {n: d, dec: 0, unit: 'দিন', en: 'Days'};
+  if (h === 0) return {n: 0, dec: 0, unit: 'বছর', en: 'Years'};
+  return {n: h, dec: 0, unit: 'ঘণ্টা', en: 'Hours'};
+}
+function durTxt(h){ var d = dur(h); return fmt(d.n, d.dec) + ' ' + d.unit; }
+function durEn(h){ var d = dur(h); return fmt(d.n, d.dec) + ' ' + d.en; }
+function money(n){
+  n = Math.max(0, safe(n));
+  if (n >= 1e7) return {n: n / 1e7, dec: 2, unit: 'কোটি'};
+  if (n >= 1e5) return {n: n / 1e5, dec: 2, unit: 'লাখ'};
+  return {n: n, dec: 0, unit: ''};
+}
+function cu(n, dec){
+  n = safe(n); dec = dec || 0;
+  return '<span class="cu num" data-to="' + n + '" data-dec="' + dec + '">' + fmt(REDUCED ? n : 0, dec) + '</span>';
+}
+function isDhaka(c){ return /dhaka|ঢাকা|dhk|gazipur|গাজীপুর|narayan|নারায়ণগঞ্জ|savar|সাভার|tongi|টঙ্গী/i.test(c || ''); }
+function scrollToEl(el, block){ if (el) el.scrollIntoView({behavior: REDUCED ? 'auto' : 'smooth', block: block || 'start'}); }
+var toastT;
+function toast(msg, ms){
+  var t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(function(){ t.classList.remove('show'); }, ms || 3400);
+}
+
+/* ================= Quiz ================= */
+var STEPS = [
+  {k:'name', type:'text', icon:'👋', q:'প্রথমে, আপনার নামটা কী?', sub:'রিপোর্ট আর Life Card-এ এই নামটাই থাকবে।', ph:'যেমন: Rakib'},
+  {k:'birthYear', type:'year', icon:'🎂', q:'কোন সালে জন্ম?', sub:'বয়স থেকেই পুরো হিসাব শুরু।', ph:'যেমন: 1995'},
+  {k:'city', type:'city', icon:'📍', q:'কোন শহরে থাকেন?', opts:['Dhaka','Chattogram','Sylhet','Rajshahi','Khulna','Barishal','Rangpur','Mymensingh','প্রবাসে']},
+  {k:'tea', type:'num', icon:'☕', q:'দিনে কয় কাপ চা/কফি খান?', sub:'টং দোকানের চা-ও গুনবেন 😉', unit:'কাপ', opts:[0,1,2,3,4,5,6,8], min:0, max:40},
+  {k:'mobile', type:'num', icon:'📱', q:'দিনে কত ঘণ্টা Mobile চালান?', sub:'সত্যি বলবেন 😄 Screen time দেখে নিতে পারেন।', unit:'ঘণ্টা', opts:[1,2,3,4,5,6,8,10], min:0, max:24},
+  {k:'social', type:'num', icon:'💬', q:'Facebook / Social Media-তে কত ঘণ্টা?', sub:'দিনে, ফোন + ল্যাপটপ মিলিয়ে', unit:'ঘণ্টা', opts:[0,0.5,1,2,3,4,5,6], min:0, max:24},
+  {k:'commute', type:'num', icon:'🚌', q:'দিনে কত সময় রাস্তায় যায়?', sub:'অফিস/ক্লাসে যাওয়া-আসা — জ্যামসহ 🥲', unit:'ঘণ্টা', opts:[0,0.5,1,1.5,2,3,4,5], min:0, max:16},
+  {k:'sleep', type:'num', icon:'😴', q:'দিনে কত ঘণ্টা ঘুমান?', sub:'দুপুরের ভাতঘুমসহ 😄', unit:'ঘণ্টা', opts:[4,5,6,7,8,9,10,11], min:0, max:20},
+  {k:'parents', type:'pick', icon:'🤍', q:'বাবা-মায়ের সাথে কতটা দেখা হয়?', sub:'এই উত্তর দিয়েই রিপোর্টের সবচেয়ে দামি হিসাবটা হবে।', list:true,
+    opts:[{v:300,l:'🏠 একসাথেই থাকি'},{v:52,l:'📅 প্রায় প্রতি সপ্তাহে'},{v:12,l:'🗓️ মাসে একবারের মতো'},{v:8,l:'🧳 বছরে কয়েকবার'},{v:5,l:'🌙 শুধু ঈদের ছুটিতে'},{v:-1,l:'🤍 তাঁরা আর পাশে নেই'}], skip:'এড়িয়ে যান'},
+  {k:'income', type:'pick', icon:'💰', q:'মাসিক আয় মোটামুটি কত?', sub:'শুধু মজার হিসাবের জন্য — Life Card-এ দেখাবে না।', wide:true,
+    opts:[{v:0,l:'এখনো আয় নেই'},{v:15000,l:'~৳15k'},{v:30000,l:'~৳30k'},{v:50000,l:'~৳50k'},{v:100000,l:'~৳1 লাখ'},{v:200000,l:'৳2 লাখ+'}], custom:{min:0, max:100000000, pre:'৳', ph:'নিজে লিখুন'}, skip:'বলতে চাই না'},
+  {k:'bonus', type:'bonus', icon:'🎉', q:'শেষ ধাপ! একটু Bonus', sub:'Optional — চাইলে সরাসরি রিপোর্ট দেখুন।'}
+];
+var BONUS = [
+  {k:'eatOut', label:'🍛 সপ্তাহে কয়দিন বাইরে খান?', unit:'দিন', opts:[0,1,2,3,4,5,7]},
+  {k:'streaming', label:'🎬 সপ্তাহে কয় ঘণ্টা YouTube / Netflix দেখেন?', unit:'ঘণ্টা', opts:[0,2,5,10,15,20,30]}
+];
+var S = {}, idx = 0, busy = false;
+var form = $('#lifeForm'), stage = $('#qStage');
+function stepOf(k){ for (var i = 0; i < STEPS.length; i++) if (STEPS[i].k === k) return STEPS[i]; return null; }
+
+function react(k, v){
+  switch (k){
+    case 'city': return /dhaka|ঢাকা/i.test(v) ? 'ঢাকা! জ্যামের শহরে স্বাগতম 🏙️' : /chatt|চট্ট|চাটগাঁ/i.test(v) ? 'চাটগাঁইয়া! সমুদ্রের শহর 🌊' : /sylhet|সিলেট/i.test(v) ? 'চায়ের দেশ! 🍃' : /প্রবাস/.test(v) ? 'দেশের বাইরে থেকেও দেশের হিসাব 🇧🇩' : 'দারুণ জায়গা! 👍';
+    case 'tea': return v === 0 ? 'চা ছাড়া? আপনি বিরল প্রজাতি! 🫢' : v <= 2 ? 'পরিমিত — ভালো! 👌' : v <= 4 ? 'খাঁটি বাঙালি ☕' : 'টং দোকানের মামা আপনাকে নামে চেনে 😄';
+    case 'mobile': return v <= 2 ? 'Digital detox champion 🧘' : v <= 5 ? 'একদম স্বাভাবিক 📱' : v <= 8 ? 'ফোনটা একটু বিশ্রাম চায় 😅' : 'ফোনের battery-ও আপনাকে ভয় পায় 🔋';
+    case 'social': return v === 0 ? 'সত্যি?! শ্রদ্ধা 🙇' : v <= 1 ? 'নিয়ন্ত্রণে আছে 👏' : v <= 3 ? 'Scroll, scroll, scroll… 🌀' : 'Reels-এর algorithm আপনাকে খুব ভালোবাসে 😄';
+    case 'commute': return v === 0 ? 'Work from home? ভাগ্যবান! 🏠' : v <= 1 ? 'মোটামুটি রেহাই 😌' : v <= 2 ? 'জ্যামের সাথে বন্ধুত্ব হয়ে গেছে 🚌' : 'আপনি সত্যিকারের যোদ্ধা 🫡';
+    case 'sleep': return v < 6 ? 'বালিশ আপনাকে খুব মিস করে 🥱' : v < 7 ? 'আরেকটু ঘুম দরকার 😴' : v <= 9 ? 'Perfect ঘুম! 😴' : 'ঘুম বিশেষজ্ঞ! 🛌';
+    case 'parents': return v === -1 ? 'তাঁদের জন্য দোয়া রইল 🤍' : v >= 300 ? 'আপনি ভাগ্যবান 🤍' : 'ঠিক আছে 🤍';
+    case 'income': return 'ঠিক আছে 👍';
+  }
+  return '';
+}
+
+function optsHTML(k, unit, label, opts, cur, cls){
+  return '<div class="opts' + (cls ? ' ' + cls : '') + '" role="radiogroup" aria-label="' + esc(label) + '">' + opts.map(function(o){
+    var v = typeof o === 'object' ? o.v : o;
+    var l = typeof o === 'object' ? o.l : fmtH(o) + (unit ? '<small>' + unit + '</small>' : '');
+    return '<button type="button" class="opt" role="radio" data-k="' + k + '" data-v="' + esc(v) + '" aria-checked="' + (cur === v) + '">' + l + '</button>';
+  }).join('') + '</div>';
+}
+function inOpts(opts, v){ return opts.some(function(o){ return (typeof o === 'object' ? o.v : o) === v; }); }
+
+function stepHTML(st, dir){
+  var cur = S[st.k], showNext = true;
+  var h = '<div class="q' + (dir === 'back' ? ' back' : '') + '" data-step="' + st.k + '">' +
+    '<div class="q-ic" aria-hidden="true">' + st.icon + '</div><h3 class="q-title" id="qTitle" tabindex="-1">' + st.q + '</h3>' +
+    (st.sub ? '<p class="q-sub">' + st.sub + '</p>' : '');
+  if (st.type === 'text' || st.type === 'year'){
+    h += '<div class="big-inp"><div class="inp"><input id="qInput" type="text" aria-labelledby="qTitle" aria-describedby="qErr" ' +
+      (st.type === 'year' ? 'inputmode="numeric" maxlength="4"' : 'maxlength="30" autocomplete="given-name"') +
+      ' placeholder="' + st.ph + '" value="' + (cur != null ? esc(cur) : '') + '"></div></div>';
+  } else if (st.type === 'city'){
+    h += optsHTML('city', '', st.q, st.opts, cur, 'wide');
+    h += '<p class="custom-lbl">অন্য শহর?</p><div class="custom"><div class="inp"><input id="qInput" type="text" maxlength="30" aria-label="অন্য শহরের নাম" placeholder="শহরের নাম লিখুন" value="' + (cur && st.opts.indexOf(cur) < 0 ? esc(cur) : '') + '"></div></div>';
+  } else if (st.type === 'num' || st.type === 'pick'){
+    h += optsHTML(st.k, st.unit, st.q, st.opts, cur, st.list ? 'list' : (st.wide ? 'wide' : ''));
+    if (st.type === 'num' || st.custom){
+      var c = st.custom || {};
+      var show = isNum(cur) && !inOpts(st.opts, cur) ? cur : '';
+      h += '<p class="custom-lbl">' + (st.type === 'num' ? 'অন্য সংখ্যা?' : 'সঠিক সংখ্যাটা লিখতে চান?') + '</p><div class="custom"><div class="inp">' +
+        (c.pre ? '<span class="pre" aria-hidden="true">' + c.pre + '</span>' : '') +
+        '<input id="qInput" type="text" inputmode="decimal" aria-label="নিজে লিখুন" aria-describedby="qErr" placeholder="' + (c.ph || 'যেমন: 2.5') + '" value="' + show + '">' +
+        (st.unit ? '<span class="unit">' + st.unit + '</span>' : '') + '</div>' +
+        '<button type="submit" class="btn btn-ghost">ঠিক আছে</button></div>';
+    }
+    showNext = cur !== undefined;
+  } else if (st.type === 'bonus'){
+    BONUS.forEach(function(b){ h += '<p class="q-sublabel">' + b.label + '</p>' + optsHTML(b.k, b.unit, b.label, b.opts, S[b.k], ''); });
+  }
+  h += '<p class="react" id="qReact" aria-live="polite"></p><p class="err" id="qErr" aria-live="polite"></p><div class="q-foot">';
+  if (st.type === 'bonus') h += '<button type="button" class="btn btn-primary btn-block" data-act="finish">✨ আমার জীবনটা হিসাব করুন</button>';
+  else h += '<button type="button" class="btn btn-primary btn-block" data-act="next"' + (showNext ? '' : ' hidden') + '>পরের ধাপ <span class="arrow" aria-hidden="true">→</span></button>';
+  if (st.skip) h += '<button type="button" class="skip" data-act="skip">' + st.skip + ' →</button>';
+  return h + '</div></div>';
+}
+
+function renderStep(dir, focus){
+  var st = STEPS[idx];
+  stage.innerHTML = stepHTML(st, dir);
+  $('#progBar').style.width = ((idx + 1) / STEPS.length * 100) + '%';
+  $('#progTxt').textContent = (idx + 1) + '/' + STEPS.length;
+  $('#qBack').disabled = idx === 0;
+  if (st.type === 'year') yearPreview();
+  if (focus){
+    var el = (st.type === 'text' || st.type === 'year') ? $('#qInput') : $('#qTitle');
+    try { el.focus({preventScroll: true}); } catch (e) {}
+    var top = form.getBoundingClientRect().top;
+    if (top < 0 || top > window.innerHeight * 0.4) scrollToEl(form, 'start');
+  }
+}
+function setErr(msg){
+  var q = $('.q', stage); if (!q) return;
+  q.classList.toggle('bad', !!msg);
+  $('#qErr').textContent = msg || '';
+}
+function showReact(txt){ var r = $('#qReact'); if (r){ r.textContent = txt; r.classList.toggle('show', !!txt); } }
+
+function checkVal(k, v){
+  if (k === 'name'){
+    if (!v) return 'আপনার নামটা লিখুন 🙂';
+    if (!/[\p{L}]/u.test(v)) return 'নামটা একটু ঠিক করে লিখুন';
+    return '';
+  }
+  if (k === 'city') return v ? '' : 'একটা শহর বেছে নিন বা লিখুন';
+  if (v === null || v === undefined) return 'একটা উত্তর বেছে নিন';
+  if (isNaN(v)) return 'শুধু সংখ্যা লিখুন';
+  if (k === 'birthYear'){
+    if (v % 1 !== 0 || String(v).length !== 4) return 'চার অঙ্কে সাল লিখুন (যেমন 1995)';
+    if (v > CY) return 'ভবিষ্যৎ থেকে এসেছেন? 😄 সঠিক সাল দিন';
+    if (v > CY - 5) return 'বয়স অন্তত ৫ বছর হতে হবে 🙂';
+    if (v < CY - 100) return 'সালটা একটু বেশিই পুরোনো মনে হচ্ছে 🤔';
+    return '';
+  }
+  var st = stepOf(k), lim = st && (st.custom || st);
+  if (lim && isNum(lim.min) && (v < lim.min || v > lim.max)){
+    if (k === 'income') return 'সংখ্যাটা একটু বেশিই বড় মনে হচ্ছে 😅';
+    return lim.min + ' থেকে ' + fmt(lim.max) + ' ' + (st.unit || '') + '-এর মধ্যে লিখুন';
+  }
+  if (k === 'sleep' && v + Math.max(S.mobile || 0, S.social || 0) > 24) return 'ঘুম + ফোন মিলে ২৪ ঘণ্টার বেশি হয়ে যাচ্ছে 🤔';
+  if (k === 'commute' && v + (S.mobile || 0) > 24) return 'যাতায়াত + ফোন মিলে ২৪ ঘণ্টার বেশি হয়ে যাচ্ছে';
+  return '';
+}
+function yearPreview(){
+  var n = parseNum($('#qInput').value);
+  if (isNum(n) && !checkVal('birthYear', n)){ var age = CY - n; showReact('বয়স ' + age + ' বছর — মানে প্রায় ' + fmt(age * DY) + ' দিন! 🤯'); }
+  else showReact('');
+}
+function advance(){ if (idx < STEPS.length - 1){ idx++; renderStep('fwd', true); } }
+
+function next(){
+  var st = STEPS[idx], inp = $('#qInput');
+  if (st.type === 'text' || st.type === 'year'){
+    var v = st.type === 'text' ? inp.value.trim().replace(/\s+/g, ' ') : parseNum(inp.value);
+    var m = checkVal(st.k, v);
+    if (m){ setErr(m); inp.focus(); return; }
+    S[st.k] = v;
+  } else if (st.type === 'city'){
+    var typed = inp.value.trim().replace(/\s+/g, ' ');
+    if (typed) S.city = typed;
+    var mc = checkVal('city', S.city);
+    if (mc){ setErr(mc); return; }
+  } else if (st.type !== 'bonus' && S[st.k] === undefined){ setErr('একটা উত্তর বেছে নিন'); return; }
+  setErr(''); advance();
+}
+function commit(st, v){
+  S[st.k] = v;
+  showReact(react(st.k, v));
+  busy = true;
+  setTimeout(function(){ busy = false; if (STEPS[idx] === st) advance(); }, REDUCED ? 250 : 750);
+}
+function choose(k, raw, btn){
+  if (busy) return;
+  var st = STEPS[idx], v = (k === 'city') ? raw : parseFloat(raw);
+  $$('.opt[data-k="' + k + '"]', stage).forEach(function(b){ b.setAttribute('aria-checked', String(b === btn)); });
+  var m = checkVal(k, v);
+  if (m){ setErr(m); return; }
+  setErr('');
+  if (st.type === 'bonus'){ S[k] = v; return; }
+  if ($('#qInput')) $('#qInput').value = '';
+  commit(st, v);
+}
+function applyCustom(){
+  var st = STEPS[idx], v = parseNum($('#qInput').value);
+  if (v === null){ setErr('একটা সংখ্যা লিখুন'); return; }
+  var m = checkVal(st.k, v);
+  if (m){ setErr(m); return; }
+  setErr('');
+  $$('.opt', stage).forEach(function(b){ b.setAttribute('aria-checked', String(parseFloat(b.dataset.v) === v)); });
+  commit(st, v);
+}
+
+form.addEventListener('click', function(e){
+  var o = e.target.closest('.opt');
+  if (o){ choose(o.dataset.k, o.dataset.v, o); return; }
+  var a = e.target.closest('[data-act]');
+  if (!a || busy) return;
+  var act = a.dataset.act, st = STEPS[idx];
+  if (act === 'next') next();
+  else if (act === 'skip'){ S[st.k] = null; setErr(''); advance(); }
+  else if (act === 'finish') finish();
+});
+form.addEventListener('submit', function(e){
+  e.preventDefault();
+  if (busy) return;
+  var st = STEPS[idx];
+  if (st.type === 'num' || st.type === 'pick') applyCustom(); else next();
+});
+form.addEventListener('input', function(e){
+  if (e.target.id !== 'qInput') return;
+  var st = STEPS[idx];
+  if ($('.q.bad', stage)) setErr('');
+  if (st.type === 'year') yearPreview();
+  if (st.type === 'city' && e.target.value.trim()) $$('.opt', stage).forEach(function(b){ b.setAttribute('aria-checked', 'false'); });
+});
+$('#qBack').addEventListener('click', function(){ if (idx > 0 && !busy){ idx--; renderStep('back', true); } });
+
+function finish(){
+  var v = {
+    name: S.name, birthYear: S.birthYear, city: S.city,
+    tea: S.tea, mobile: S.mobile, social: S.social, commute: S.commute, sleep: S.sleep,
+    parents: isNum(S.parents) ? S.parents : null,
+    income: isNum(S.income) ? S.income : null,
+    eatOut: isNum(S.eatOut) ? S.eatOut : 0,
+    streaming: isNum(S.streaming) ? S.streaming : 0
+  };
+  var keys = ['name','birthYear','city','tea','mobile','social','commute','sleep'];
+  for (var i = 0; i < keys.length; i++){
+    var m = checkVal(keys[i], v[keys[i]]);
+    if (m){ idx = STEPS.indexOf(stepOf(keys[i])); renderStep('back', true); setErr(m); return; }
+  }
+  runLoader(function(){ render(compute(v)); });
+}
+
+/* ================= Loader ================= */
+var LOADER_MSGS = ['চায়ের কাপ গুনছি ☕', 'ট্রাফিক জ্যাম মাপছি 🚌', 'ঘুমের ঘণ্টা যোগ করছি 😴', 'Scroll-এর দূরত্ব মাপছি 📱', 'আপনার গল্পটা সাজাচ্ছি ❤️'];
+function runLoader(done){
+  var L = $('#loader'), msg = $('#loaderMsg'), i = 0;
+  if (REDUCED){ done(); return; }
+  L.classList.remove('show'); void L.offsetWidth; L.classList.add('show');
+  msg.textContent = LOADER_MSGS[0];
+  var iv = setInterval(function(){ i = Math.min(i + 1, LOADER_MSGS.length - 1); msg.textContent = LOADER_MSGS[i]; }, 400);
+  setTimeout(function(){ clearInterval(iv); done(); L.classList.remove('show'); }, 2100);
+}
+
+/* ================= Calculation ================= */
+function compute(v){
+  var age = CY - v.birthYear, days = age * DY, hours = days * 24;
+  var r = {v: v, age: age, days: days, hours: hours, dhaka: isDhaka(v.city), hasIncome: isNum(v.income)};
+  var inc = r.hasIncome ? v.income : 0;
+
+  r.teaCups = days * v.tea;
+  r.teaLiters = r.teaCups * 0.15;
+  r.teaHours = r.teaCups * (10 / 60);          // ~10 min per cup, adda included
+  r.socialH = days * v.social;
+  r.mobileH = days * v.mobile;
+  r.commuteH = days * v.commute;
+  r.sleepH = days * v.sleep;
+  r.income = inc * 12 * age;
+  r.eatOutTimes = v.eatOut * (DY / 7) * age;
+  r.streamH = v.streaming * (DY / 7) * age;
+  r.socialPct = clamp(v.social / 24 * 100, 0, 100);
+  r.mobilePct = clamp(v.mobile / 24 * 100, 0, 100);
+  r.commutePct = clamp(v.commute / 24 * 100, 0, 100);
+  r.sleepPct = clamp(v.sleep / 24 * 100, 0, 100);
+  r.ctgTrips = r.commuteH / 12;                 // fun: ~6h each way Dhaka ⇄ Chattogram
+  r.workH = Math.max(0, age - 6) * DY * (6 * 6 / 7); // work/study from age 6, ~6h/day, 6 days/week
+
+  r.lifePct = clamp(age / LIFE * 100, 0, 100);
+  r.yearsLeft = Math.max(0, LIFE - age);
+
+  // Time with parents ("Tail End" idea) — rough, clearly-labelled estimate
+  var p = v.parents;
+  r.par = null;
+  if (p === -1) r.par = {gone: true};
+  else if (isNum(p) && p > 0){
+    var pAge = age + 28, pLeft = Math.max(0, LIFE_P - pAge), ahead = pLeft * p;
+    var soFar = Math.min(age, 18) * 330 + Math.max(0, age - 18) * p;
+    r.par = {perYear: p, pAge: pAge, pLeft: pLeft, ahead: ahead, pct: ahead > 0 ? clamp(soFar / (soFar + ahead) * 100, 0, 99) : 100, together: p >= 300};
+  }
+
+  // 24h breakdown
+  var screen = Math.max(v.mobile, v.social);
+  var parts = [
+    {k:'sleep', name:'ঘুম', sub:'Sleep', h:v.sleep, c:'#3b5bdb'},
+    {k:'mobile', name:'Mobile', sub:'Social Media বাদে', h:Math.max(0, screen - v.social), c:'#22b8cf'},
+    {k:'social', name:'Social Media', sub:'Facebook, Insta…', h:v.social, c:'#f59f00'},
+    {k:'commute', name:'যাতায়াত', sub:'Commute', h:v.commute, c:'#f76707'}
+  ];
+  var used = parts.reduce(function(s, x){ return s + x.h; }, 0);
+  r.dayOverlap = used > 24;
+  if (used > 24){ parts.forEach(function(x){ x.h = x.h * 24 / used; }); used = 24; }
+  parts.push({k:'other', name:'বাকি সব', sub:'কাজ, পড়া, পরিবার, আড্ডা…', h:Math.max(0, 24 - used), c:'#12b886'});
+  var raw = parts.map(function(x){ return x.h / 24 * 100; });
+  var fl = raw.map(Math.floor), left = 100 - fl.reduce(function(a, b){ return a + b; }, 0);
+  raw.map(function(x, i){ return {i: i, r: x - Math.floor(x)}; }).sort(function(a, b){ return b.r - a.r; })
+    .slice(0, left).forEach(function(o){ fl[o.i]++; });
+  parts.forEach(function(x, i){ x.pct = fl[i]; x.exact = raw[i]; });
+  r.day = parts;
+
+  // Playful scores
+  var teaDist = v.tea < 1 ? 1 - v.tea : (v.tea > 3 ? v.tea - 3 : 0);
+  var sleepDist = v.sleep < 7 ? 7 - v.sleep : (v.sleep > 9 ? v.sleep - 9 : 0);
+  var work = (r.hasIncome ? inc > 0 : age >= 22) ? 8 * 6 / 7 : 0;
+  var free = 24 - v.sleep - v.commute - work - screen * 0.5;
+  var s = {
+    tea: clamp(Math.round(100 - teaDist * 14), 15, 100),
+    digital: clamp(Math.round(100 - Math.max(0, screen - 2) * 9 - Math.max(0, v.social - 1.5) * 6), 10, 100),
+    traffic: clamp(Math.round(100 - v.commute * 14), 15, 100),
+    sleep: clamp(Math.round(100 - sleepDist * 22), 10, 100),
+    finance: r.hasIncome ? clamp(Math.round(inc <= 0 ? 30 : 30 + 70 * clamp(Math.log10(Math.max(1, inc / 3000)) / Math.log10(150), 0, 1)), 20, 100) : null,
+    balance: clamp(Math.round(free / 6 * 100 - (v.streaming > 21 ? 10 : 0) + (v.eatOut >= 1 && v.eatOut <= 3 ? 5 : 0)), 10, 100)
+  };
+  var W = {tea:.12, digital:.2, traffic:.15, sleep:.2, finance:.13, balance:.2}, tot = 0, wsum = 0;
+  Object.keys(W).forEach(function(k){ if (s[k] !== null){ tot += s[k] * W[k]; wsum += W[k]; } });
+  s.total = clamp(Math.round(tot / wsum), 5, 99);
+  r.score = s; r.free = free;
+  r.persona = pickPersona(v, s, r.dhaka);
+  return r;
+}
+
+var PERSONAS = {
+  dhaka:   {t:'Dhaka Survivor 🏙️', d:'জ্যাম, ধুলা, ভিড়—সব সামলে আপনি টিকে আছেন। সত্যিকারের survivor!', tag:'যে বন্ধু সবসময় “জ্যামে আটকে আছি” বলে দেরি করে'},
+  tea:     {t:'Tea Addict ☕', d:'আপনার রক্তে হিমোগ্লোবিনের চেয়ে চা বেশি। টং দোকানের মামা আপনাকে নামে চেনে।', tag:'আপনার সবচেয়ে বড় চা-খোর বন্ধুকে'},
+  digital: {t:'Digital Native 📱', d:'Wi-Fi password আপনার কাছে মৌলিক অধিকার। Notification না এলে অস্থির লাগে।', tag:'যে বন্ধু সারাদিন online থাকে কিন্তু reply দেয় না'},
+  weekend: {t:'Weekend Warrior 🏃', d:'সপ্তাহের শেষটা আপনি পুরোপুরি উপভোগ করেন—খাওয়া, ঘোরা, binge-watch!', tag:'আপনার foodie / আড্ডাবাজ বন্ধুকে'},
+  balanced:{t:'Balanced Life 🌿', d:'কাজ, ঘুম, ফোন—সবকিছুতে সুন্দর একটা ব্যালান্স। এভাবেই চালিয়ে যান!', tag:'যে বন্ধু দাবি করে তার জীবন আপনার চেয়ে গোছানো'},
+  hustler: {t:'Full-Time Hustler 💼', d:'ঘুম পরে হবে, আগে কাজ! শুধু মাঝে মাঝে নিজের জন্যও একটু সময় রাখবেন।', tag:'আপনার সবচেয়ে busy বন্ধুকে'}
+};
+function pickPersona(v, s, dhaka){
+  var inc = isNum(v.income) ? v.income : 0;
+  var c = [
+    ['tea', Math.min(v.tea / 4, 3)],
+    ['digital', Math.min(Math.max(v.mobile / 6, v.social / 3.5), 3)],
+    ['dhaka', Math.min((v.commute / 2) * (dhaka ? 1.15 : 0.85), 3)],
+    ['hustler', (Math.min(inc, 150000) / 80000) * (v.sleep < 7 ? 1.1 : 0.7) * (v.commute >= 1 ? 1 : 0.8)],
+    ['weekend', Math.min(Math.max(v.eatOut / 3, v.streaming / 10), 3)]
+  ].sort(function(a, b){ return b[1] - a[1]; });
+  if (c[0][1] >= 1) return c[0][0];
+  if (s.total < 60 && v.sleep < 6) return 'hustler';
+  return 'balanced';
+}
+
+/* ================= Rendering ================= */
+function statCard(o){
+  return '<article class="stat rv t-' + o.tone + '" style="--d:' + (o.d || 0) + 's">' +
+    '<div class="stat-top"><span class="si" aria-hidden="true">' + o.icon + '</span><h3>' + o.title + '</h3></div>' +
+    '<div class="big"><span class="v">' + (o.pre || '') + cu(o.n, o.dec) + '</span><span class="u">' + o.unit + '</span></div>' +
+    '<p class="sub">' + o.sub + '</p>' +
+    (o.pct != null ? '<div class="bar" aria-hidden="true"><i style="--w:' + clamp(o.pct, 0, 100).toFixed(1) + '%"></i></div>' : '') +
+    (o.extra ? '<p class="extra">' + o.extra + '</p>' : '') +
+    (o.warn ? '<p class="warn">' + o.warn + '</p>' : '') + '</article>';
+}
+function secReport(r){
+  var v = r.v, soc = dur(r.socialH), mob = dur(r.mobileH), com = dur(r.commuteH), slp = dur(r.sleepH), inc = money(r.income);
+  var cards = [
+    statCard({tone:'amber', icon:'☕', title:'চা / কফি', n:r.teaCups, dec:0, unit:'কাপ', sub:v.tea > 0 ? 'আপনার জীবনের ছোট্ট একটা বড় অংশ।' : 'চা ছাড়াই জীবন? সত্যিই বিরল!', extra:'অর্থাৎ প্রায় <b>' + fmt(r.teaLiters) + ' লিটার</b> চা!'}),
+    statCard({tone:'blue', icon:'💬', title:'Social Media', n:soc.n, dec:soc.dec, unit:soc.unit, sub:'Scrolling-এর পেছনে কেটেছে।', pct:r.socialPct, d:.06, extra:'জীবনের প্রায় <b>' + fmt(r.socialPct, 1) + '%</b>'}),
+    statCard({tone:'orange', icon:'🚌', title:'যাতায়াত', n:com.n, dec:com.dec, unit:com.unit, sub:'রাস্তায় কেটে যাওয়া সময়।', pct:r.commutePct, d:.12,
+      extra: r.ctgTrips >= 1 ? 'এই সময় দিয়ে প্রায় <b>' + fmt(r.ctgTrips) + ' বার</b> Dhaka ⇄ Chattogram যাওয়া-আসা করা যেত।' : 'যাতায়াতের ঝামেলা প্রায় নেই—ভাগ্যবান!',
+      warn: r.ctgTrips >= 1 ? 'মজার আনুমানিক হিসাব — এক দিকে ~৬ ঘণ্টা ধরে।' : ''}),
+    statCard({tone:'indigo', icon:'😴', title:'ঘুম', n:slp.n, dec:slp.dec, unit:slp.unit, sub:(r.sleepPct >= 28 && r.sleepPct <= 38) ? 'জীবনের প্রায় এক-তৃতীয়াংশ।' : 'জীবনের প্রায় ' + fmt(r.sleepPct) + '%।', pct:r.sleepPct, d:.18, extra:'আপনার জীবনের প্রায় <b>' + fmt(r.sleepPct) + '%</b> ঘুমে কেটেছে।'}),
+    statCard({tone:'cyan', icon:'📱', title:'Mobile', n:mob.n, dec:mob.dec, unit:mob.unit, sub:'ফোন আপনার জীবনের কতটা জায়গা নিয়েছে?', pct:r.mobilePct, d:.24, extra:'জীবনের প্রায় <b>' + fmt(r.mobilePct, 1) + '%</b> মোবাইল হাতে।'})
+  ];
+  if (r.hasIncome) cards.push(statCard({tone:'green', icon:'💰', title:'আনুমানিক মোট আয়', n:inc.n, dec:inc.dec, pre:'৳', unit:inc.unit, sub:'আনুমানিক lifetime income', d:.3,
+    warn:'ধরে নেওয়া হয়েছে আজকের মাসিক আয় পুরো ' + r.age + ' বছর একই ছিল — এটা আপনার আসল আয়ের হিসাব নয়।'}));
+  return '<section class="anim" id="report" aria-labelledby="res-title"><div class="wrap">' +
+    '<div class="res-hero rv"><div class="confetti" aria-hidden="true">🎉</div>' +
+    '<h2 id="res-title" tabindex="-1">আপনার Life Report তৈরি হয়ে গেছে 🎉</h2>' +
+    '<div class="who"><h3>' + esc(v.name) + '-এর জীবন</h3><span>' + esc(v.city) + ' · ' + r.age + ' বছর</span></div>' +
+    '<p class="note assume">ধরে নেওয়া হয়েছে আজকের অভ্যাস জন্ম থেকেই একই ছিল — তাই এগুলো মজার আনুমানিক সংখ্যা।</p></div>' +
+    '<div class="stats">' + cards.join('') + '</div></div></section>';
+}
+
+function discoveries(r){
+  var v = r.v, out = [];
+  function add(e, t, note, tint){ out.push({e: e, t: t, n: note || '', tint: tint}); }
+  if (v.tea >= 4) add('☕', 'আপনি এত চা খেয়েছেন যে একটা ছোট টং দোকান প্রায় ' + fmt(r.teaCups / 200) + ' দিন চালানো যেত!', 'দিনে ~২০০ কাপ বিক্রি ধরে', 'var(--amber-50)');
+  else if (v.tea === 0) add('🫖', 'চা ছাড়া বাংলাদেশে বেঁচে আছেন? আপনি সত্যিই বিরল প্রজাতি!', '', 'var(--amber-50)');
+  if (v.mobile >= 6) add('📲', 'আপনার ফোন সম্ভবত আপনার সবচেয়ে দীর্ঘ relationship — একসাথে ' + durTxt(r.mobileH) + '!', '', 'var(--cyan-50)');
+  if (v.social >= 3){
+    var km = r.socialH * 0.06;
+    add('📱', 'আপনার বুড়ো আঙুল প্রায় ' + fmt(km) + ' km scroll করেছে — ' + (km >= 900 ? 'প্রায় ' + fmt(km / 900, 1) + ' বার Teknaf থেকে Tetulia!' : 'প্রায় ' + fmt(km / 8.849, 1) + 'টা Everest-এর সমান!'), 'মজার আনুমানিক — ঘণ্টায় ~৬০ মিটার scroll ধরে', 'var(--blue-50)');
+  }
+  if (v.commute >= 2) add('🚌', 'আপনার যাতায়াতের সময় দিয়ে প্রায় ' + fmt(r.ctgTrips) + 'টা Dhaka ⇄ Chattogram trip করা যেত!', 'মজার আনুমানিক — এক দিকে ~৬ ঘণ্টা ধরে', 'var(--orange-50)');
+  else if (v.commute === 0) add('🏠', 'প্রতিদিন কোনো যাতায়াত নেই? ঢাকার মানুষ আপনাকে রীতিমতো হিংসা করবে!', '', 'var(--orange-50)');
+  if (v.sleep >= 8) add('😴', 'আপনি ঘুমকে খুব সিরিয়াসলি নেন। বালিশটা আপনার সবচেয়ে বিশ্বস্ত বন্ধু।', '', 'var(--indigo-50)');
+  else if (v.sleep < 6) add('🥱', 'দিনে ' + fmtH(v.sleep) + ' ঘণ্টা ঘুম? আপনার বালিশ আপনাকে খুব মিস করে।', '', 'var(--indigo-50)');
+  if (r.hasIncome && v.income > 0) add('🐟', (v.income >= 100000 ? 'আপনার hypothetical lifetime income বেশ impressive! ' : 'আপনার আনুমানিক lifetime income দিয়ে ') + 'প্রায় ' + fmt(r.income / 1600) + ' কেজি ইলিশ কেনা যেত!', '৳১,৬০০/কেজি ধরে — নিছক মজা', 'var(--green-50)');
+  if (v.eatOut >= 3) add('🍛', 'আপনি প্রায় ' + fmt(r.eatOutTimes) + ' বার বাইরে খেয়েছেন — এলাকার কাচ্চির দোকান আপনাকে চেনে!', '', 'var(--rose-50)');
+  if (v.streaming >= 10) add('🎬', '“আর একটা episode” বলতে বলতে প্রায় ' + fmt(r.streamH / 8) + 'টা পুরো season শেষ!', 'এক season ~৮ ঘণ্টা ধরে', 'var(--blue-50)');
+  var fb = [
+    ['🌙', 'আপনি এ পর্যন্ত প্রায় ' + fmt(r.age * 2) + 'টা ঈদ উদযাপন করেছেন — সালামি কত পেয়েছেন, সেটা অবশ্য হিসাবের বাইরে!', '', 'var(--green-50)'],
+    ['💓', 'আপনার হৃদয় এ পর্যন্ত প্রায় ' + fmt(r.hours * 60 * 72 / 1e7, 1) + ' কোটি বার স্পন্দিত হয়েছে — একদিনও ছুটি না নিয়ে।', 'মিনিটে ~৭২ বার ধরে', 'var(--rose-50)'],
+    ['🌧️', 'জীবনে প্রায় ' + fmt(r.age) + 'টা বর্ষা দেখেছেন — আর কতবার যে জলাবদ্ধ রাস্তা পার হয়েছেন!', '', 'var(--blue-50)']
+  ];
+  for (var i = 0; out.length < 4 && i < fb.length; i++) add(fb[i][0], fb[i][1], fb[i][2], fb[i][3]);
+  return out.slice(0, 6);
+}
+function secDiscover(r){
+  return '<section class="sec anim" id="discover" aria-labelledby="ds-title"><div class="wrap">' +
+    '<div class="sec-head rv"><span class="eyebrow">Discoveries</span><h2 id="ds-title">😂 আপনার জীবন সম্পর্কে আমরা যা আবিষ্কার করেছি</h2></div>' +
+    '<div class="disc">' + discoveries(r).map(function(d, i){
+      return '<div class="disc-item rv" style="--d:' + (i * .08) + 's;--tint:' + d.tint + '"><span class="e" aria-hidden="true">' + d.e + '</span><p>' + d.t + (d.n ? '<small>' + d.n + '</small>' : '') + '</p></div>';
+    }).join('') + '</div></div></section>';
+}
+
+function catCaption(k, v, r){
+  switch (k){
+    case 'tea': return v.tea === 0 ? 'চা? সেটা আবার কী?' : v.tea >= 5 ? 'চা ছাড়া চলেই না!' : v.tea >= 2 ? 'চায়ে পারফেক্ট ব্যালান্স' : 'চা থেকে নিরাপদ দূরত্ব';
+    case 'digital': var s = Math.max(v.mobile, v.social); return s >= 7 ? 'ফোনই জীবন' : s >= 4 ? 'মোটামুটি সারাদিন online' : 'Digital detox champion';
+    case 'traffic': return v.commute === 0 ? 'Work from home লাকি!' : v.commute >= 3 ? 'জ্যামের সাথে প্রতিদিনের যুদ্ধ' : v.commute >= 1.5 ? 'রাস্তাই যেন দ্বিতীয় বাড়ি' : 'জ্যাম থেকে মোটামুটি রেহাই';
+    case 'sleep': return v.sleep < 6 ? 'ঘুম কম, স্বপ্ন বেশি' : v.sleep < 7 ? 'আরেকটু ঘুম দরকার' : v.sleep <= 9 ? 'ঘুমে একদম perfect' : 'ঘুম বিশেষজ্ঞ 😴';
+    case 'finance': return v.income <= 0 ? 'যাত্রা মাত্র শুরু' : v.income < 30000 ? 'ধীরে ধীরে এগোচ্ছেন' : v.income < 100000 ? 'ভালো পথে আছেন' : 'দারুণ যাত্রা';
+    case 'balance': return r.free >= 5 ? 'নিজের জন্যও সময় আছে' : r.free >= 2.5 ? 'একটু টানাটানি' : 'দিনটা বড্ড ঠাসা';
+  }
+  return '';
+}
+function secScore(r){
+  var s = r.score, v = r.v, P = PERSONAS[r.persona], C = 2 * Math.PI * 54;
+  var grade = s.total >= 85 ? 'অসাধারণ! জীবনটা বেশ গুছিয়ে চলছে 🌟' : s.total >= 70 ? 'বেশ ভালো! একটু tweak করলেই perfect' : s.total >= 55 ? 'মোটামুটি — উন্নতির জায়গা আছে' : 'জীবনটা একটু ব্যস্ত… নিজের দিকে খেয়াল রাখুন 💙';
+  var cats = [['tea','☕ Tea Dependency'],['digital','📱 Digital Life'],['traffic','🚌 Traffic Survival'],['sleep','😴 Sleep Balance'],['finance','💰 Financial Journey'],['balance','❤️ Life Balance']]
+    .filter(function(c){ return s[c[0]] !== null; })
+    .map(function(c, i){
+      return '<div class="cat rv" style="--d:' + (i * .06) + 's"><div class="cat-row"><b>' + c[1] + '</b><span>' + cu(s[c[0]]) + '</span></div>' +
+        '<div class="bar" aria-hidden="true"><i style="--w:' + s[c[0]] + '%;--d:' + (.2 + i * .08) + 's"></i></div><small>' + catCaption(c[0], v, r) + '</small></div>';
+    }).join('');
+  return '<section class="sec anim" id="score" aria-labelledby="sc-title" style="padding-top:8px"><div class="wrap">' +
+    '<div class="sec-head rv"><span class="eyebrow">Life Score</span><h2 id="sc-title">🇧🇩 আপনার Bangladesh Life Score</h2></div>' +
+    '<div class="card score-card rv"><div class="score-top">' +
+    '<div class="ring" role="img" aria-label="Life Score ' + s.total + ' / 100"><svg viewBox="0 0 128 128" aria-hidden="true"><circle class="bg" cx="64" cy="64" r="54"/><circle class="fg" cx="64" cy="64" r="54" style="--off:' + (C * (1 - s.total / 100)).toFixed(2) + '"/></svg>' +
+    '<div class="center"><b>' + cu(s.total) + '</b><span class="of">/ 100</span></div></div>' +
+    '<div><span class="persona">' + P.t + '</span><h3>' + grade + '</h3><p>' + P.d + '</p></div></div>' +
+    '<div class="cats">' + cats + '</div>' +
+    '<p class="disclaimer">🎈 <span>এটা একটা মজার score — কোনো বৈজ্ঞানিক বা স্বাস্থ্য মূল্যায়ন নয়।</span></p></div></div></section>';
+}
+
+function secDay(r){
+  var v = r.v, C = 2 * Math.PI * 70, off = 0;
+  var segs = r.day.map(function(p, i){
+    var len = p.exact / 100 * C, L = Math.max(0, len - (len > 3 ? 1.5 : 0));
+    var s = len > 0 ? '<circle class="seg" cx="90" cy="90" r="70" stroke="' + p.c + '" style="--len:' + L.toFixed(2) + ';--rest:' + (C - L).toFixed(2) + ';--d:' + (i * .12) + 's" stroke-dashoffset="' + (-off).toFixed(2) + '"/>' : '';
+    off += len; return s;
+  }).join('');
+  var legend = r.day.map(function(p){ return '<li><span class="dot" style="--c:' + p.c + '"></span><span class="nm">' + p.name + '<small>' + p.sub + ' · ' + fmt(p.h, 1) + ' ঘণ্টা/দিন</small></span><span class="pc">' + p.pct + '%</span></li>'; }).join('');
+  var top = r.day.filter(function(p){ return p.k !== 'sleep' && p.k !== 'other'; }).sort(function(a, b){ return b.h - a.h; })[0];
+  var insight = top && top.h > 0 ? 'ঘুমের পরে আপনার দিনের সবচেয়ে বড় অংশ যায় <b>' + top.name + '</b>-এ — প্রতিদিন প্রায় ' + fmt(top.h, 1) + ' ঘণ্টা।' : 'Mobile, Social Media আর যাতায়াত—কোনোটাই আপনার দিন খেয়ে ফেলছে না। দারুণ!';
+  var cmp = [
+    {k:'social', l:'💬 Social Media', b:3, more:'বেশি ব্যবহার করেন', less:'কম ব্যবহার করেন', better:'low'},
+    {k:'mobile', l:'📱 Mobile', b:5, more:'বেশি ফোন চালান', less:'কম ফোন চালান', better:'low'},
+    {k:'commute', l:'🚌 যাতায়াত', b:r.dhaka ? 2.5 : 1.5, more:'বেশি সময় রাস্তায় কাটান', less:'কম সময় রাস্তায় কাটান', better:'low'},
+    {k:'sleep', l:'😴 ঘুম', b:7, more:'বেশি ঘুমান', less:'কম ঘুমান', better:'sleep'}
+  ].map(function(it){
+    var u = v[it.k], diff = Math.round(Math.abs(u - it.b) / it.b * 100), res;
+    if (diff < 5) res = '🟡 প্রায় সমান — একদম গড়পড়তা!';
+    else {
+      var lower = u < it.b, dot;
+      if (it.better === 'low') dot = lower ? '🟢' : (diff > 50 ? '🔴' : '🟠');
+      else dot = lower ? (diff > 15 ? '🔴' : '🟠') : (u <= 9.5 ? '🟢' : '🟡');
+      res = dot + ' আপনি প্রায় ' + diff + '% ' + (lower ? it.less : it.more) + '।';
+    }
+    return '<div class="cmp-row"><b>' + it.l + '</b><span class="nums">আপনার: ' + fmtH(u) + 'h/day · Fun benchmark: ' + fmtH(it.b) + 'h/day</span><span class="res">' + res + '</span></div>';
+  }).join('');
+  return '<section class="sec anim" id="breakdown" aria-labelledby="bd-title" style="padding-top:8px"><div class="wrap">' +
+    '<div class="sec-head rv"><span class="eyebrow">Time Breakdown</span><h2 id="bd-title">আপনার সময় কোথায় যাচ্ছে?</h2><p>আপনার একটা গড় দিনের ২৪ ঘণ্টা ভাগ করলে এমন দাঁড়ায়।</p></div>' +
+    '<div class="card donut-card rv"><div class="donut" role="img" aria-label="' + r.day.map(function(p){ return p.name + ' ' + p.pct + '%'; }).join(', ') + '">' +
+    '<svg viewBox="0 0 180 180" aria-hidden="true"><circle class="base" cx="90" cy="90" r="70"/>' + segs + '</svg><div class="center"><b>24</b><span>ঘণ্টার একটা দিন</span></div></div>' +
+    '<div><ul class="legend">' + legend + '</ul><p class="insight">' + insight + '</p>' +
+    (r.dayOverlap ? '<p class="note" style="margin-top:10px">কিছু কাজ একসাথে হয় (যেমন বাসে বসে ফোন), তাই ২৪ ঘণ্টার মধ্যে অনুপাতে মিলিয়ে দেখানো হয়েছে।</p>' : '') + '</div></div>' +
+    '<div class="card cmp-card rv"><h3>আপনার মতো মানুষের তুলনায়</h3><span class="fun-tag">⚠️ Benchmark গুলো কাল্পনিক, শুধু মজার জন্য — কোনো জরিপের তথ্য নয়</span><div class="cmp-list">' + cmp + '</div></div>' +
+    '</div></section>';
+}
+
+function secMoment(r){
+  var v = r.v;
+  var rows = [
+    {e:'😴', n:'ঘুম', h:r.sleepH, c:'#8fa7ff'},
+    {e:'💼', n:'কাজ / পড়াশোনা', h:r.workH, c:'#c4b5fd', note:'৬ বছর বয়স থেকে, দিনে গড়ে ~৬ ঘণ্টা, সপ্তাহে ৬ দিন ধরে'},
+    {e:'📱', n:'Mobile', h:Math.max(r.mobileH, r.socialH), c:'#7ee0f0'},
+    {e:'🚌', n:'যাতায়াত', h:r.commuteH, c:'#ffb27a'},
+    {e:'☕', n:'চা (আড্ডাসহ)', h:r.teaHours, c:'#ffd27a'}
+  ];
+  var used = rows.reduce(function(s, x){ return s + x.h; }, 0), scale = used > r.hours ? r.hours / used : 1;
+  rows.forEach(function(x){ x.h *= scale; });
+  rows.push({e:'❤️', n:'নিজের জন্য', h:Math.max(0, r.hours - used * scale), c:'#9be8c9', me:true, note:'পরিবার, বন্ধু, স্বপ্ন, আড্ডা — বাকি সবকিছু'});
+  var list = rows.map(function(x, i){
+    var d = dur(x.h);
+    return '<div class="ll rv' + (x.me ? ' me' : '') + '" style="--d:' + (i * .07) + 's"><b>' + x.e + ' ' + x.n + '</b><span class="num">' + fmt(d.n, d.dec) + ' ' + d.unit + '</span>' +
+      '<span class="bar" aria-hidden="true"><i style="--w:' + clamp(x.h / r.hours * 100, 0, 100).toFixed(1) + '%;--c:' + x.c + ';--d:' + (.2 + i * .1) + 's"></i></span>' + (x.note ? '<small>' + x.note + '</small>' : '') + '</div>';
+  }).join('');
+
+  var total = Math.max(LIFE, r.age + 1), dots = '';
+  for (var i = 0; i < total; i++){
+    var cls = i < r.age ? (i >= LIFE ? 'l bonus' : 'l') : (i === r.age ? 'now' : '');
+    dots += '<i class="' + cls + '" style="--d:' + Math.min(i * 0.018, 1.4).toFixed(3) + 's"></i>';
+  }
+  var calMsg = r.age >= LIFE ? 'আপনি গড় আয়ুকেও ছাড়িয়ে গেছেন — <b>প্রতিটা দিনই এখন বোনাস</b> 🎁'
+    : 'জীবনের প্রায় <b>' + fmt(r.lifePct) + '%</b> পার হয়ে গেছে।<br>কিন্তু সেরা অংশটা হয়তো এখনো সামনে ✨';
+
+  var ahead = '';
+  if (r.yearsLeft > 0){
+    var y = r.yearsLeft;
+    ahead = '<div class="m-block rv"><h3>সামনে এখনো যা বাকি</h3><p class="m-sub">গড় আয়ু ~' + LIFE + ' বছর ধরে, আনুমানিক</p><div class="ahead">' +
+      '<div class="ah"><div class="e">🌙</div><b>' + cu(y * 2) + '</b><span>টা ঈদ</span></div>' +
+      '<div class="ah"><div class="e">🕌</div><b>' + cu(y * 52.18) + '</b><span>টা শুক্রবার</span></div>' +
+      '<div class="ah"><div class="e">🌧️</div><b>' + cu(y) + '</b><span>টা বর্ষা</span></div>' +
+      (v.tea > 0 ? '<div class="ah"><div class="e">☕</div><b>' + cu(y * DY * v.tea) + '</b><span>কাপ চা</span></div>' : '<div class="ah"><div class="e">🌕</div><b>' + cu(y * 12.37) + '</b><span>টা পূর্ণিমা</span></div>') +
+      '</div><p class="ahead-msg">সময় এখনো অনেক — কীভাবে কাটাবেন, সেটা আপনার হাতে।</p></div>';
+  }
+
+  var par = '', P = r.par;
+  if (P && P.gone){
+    par = '<div class="m-block rv"><h3>যে হিসাবটা সবচেয়ে দামি</h3><div class="parents"><div class="heart">🤍</div>' +
+      '<p class="soft">যাঁরা আর পাশে নেই, তাঁরা আমাদের প্রতিটা হিসাবের ভেতরেই থেকে যান।<br>আপনার প্রতিটা ভালো দিনে তাঁদের দোয়া মিশে আছে।</p>' +
+      '<p class="call">🤲 আজ তাঁদের জন্য একটু দোয়া করবেন</p></div></div>';
+  } else if (P && P.pLeft <= 0){
+    par = '<div class="m-block rv"><h3>যে হিসাবটা সবচেয়ে দামি</h3><div class="parents"><div class="heart">🤍</div>' +
+      '<p class="soft">বাবা-মায়ের সাথে কাটানো প্রতিটা দিনই এখন একটা উপহার।<br>কোনো হিসাব লাগে না — শুধু পাশে থাকুন।</p><p class="call">📞 আজ একবার ফোন করুন</p></div></div>';
+  } else if (P){
+    par = '<div class="m-block rv"><h3>যে হিসাবটা সবচেয়ে দামি</h3><div class="parents"><div class="heart">🤍</div>' +
+      '<p class="plbl">বাবা-মায়ের সাথে সামনে হয়তো আর</p>' +
+      '<div class="pbig">~' + cu(P.ahead) + ' <small>দিন</small></div>' +
+      '<div class="bar" aria-hidden="true"><i style="--w:' + P.pct.toFixed(1) + '%;--d:.4s"></i></div>' +
+      '<p class="pct">তাঁদের সাথে জীবনে যত দিন কাটাবেন, তার প্রায় <b>' + fmt(P.pct) + '%</b> এরই মধ্যে কেটে গেছে।</p>' +
+      '<p class="soft">' + (P.together ? 'আপনি ভাগ্যবান — প্রতিদিন তাঁদের দেখতে পান। আজ রাতে খাওয়ার সময় একটু বেশি গল্প করুন। 🍚' : 'ছোটবেলার সেই প্রতিদিনের দিনগুলো আর ফিরবে না।<br>কিন্তু সামনের দিনগুলো এখনো আপনার হাতে।') + '</p>' +
+      '<p class="call">📞 আজ একবার ফোন করুন</p>' +
+      '<p class="note">আনুমানিক — তাঁদের বয়স ~' + P.pAge + ' বছর আর বছরে ~' + P.perYear + ' দিন দেখা হয় ধরে। কার কত সময়, কেউ জানে না।</p></div></div>';
+  }
+
+  return '<section class="sec moment anim" id="moment" aria-labelledby="mm-title"><div class="wrap">' +
+    '<div class="sec-head rv"><span class="eyebrow">The Big Picture</span><h2 id="mm-title">আপনার জীবনের সবচেয়ে বড় হিসাব</h2></div>' +
+    '<div class="big3 rv"><div>' + cu(r.age) + '<span class="u">বছর</span></div><div>' + cu(r.days) + '<span class="u">দিন</span></div><div>' + cu(r.hours) + '<span class="u">ঘণ্টা</span></div></div>' +
+    '<div class="m-block"><h3 class="rv">এই সময়টা কোথায় গেল?</h3><div class="life-list">' + list + '</div>' +
+    '<p class="note">' + (scale < 1 ? 'অনেক কাজ একসাথে হয়, তাই মোট সময়ের মধ্যে অনুপাতে মিলিয়ে দেখানো হয়েছে।' : 'কিছু কাজ একসাথেও হয় — তাই এটা একটা সরল আনুমানিক ভাগ।') + '</p></div>' +
+    '<div class="m-block rv"><h3>আপনার জীবনের ক্যালেন্ডার</h3><p class="m-sub">প্রতিটা বিন্দু = জীবনের এক বছর</p>' +
+    '<div class="cal" role="img" aria-label="জীবনের প্রায় ' + fmt(r.lifePct) + '% পার হয়েছে">' + dots + '</div>' +
+    '<div class="cal-legend"><span style="--c:#9be8c9">কেটে গেছে</span><span style="--c:#ffd27a">এই বছর</span><span style="--c:rgba(255,255,255,.25)">সামনে</span></div>' +
+    '<p class="cal-msg">' + calMsg + '</p></div>' +
+    ahead + par +
+    '<div class="quote rv"><h3>“সংখ্যাগুলো মজার, কিন্তু সময়টা সত্যি।”</h3><p>সময় ফিরে আসে না। তাই হিসাবটা জানাও কখনো কখনো দরকার।</p></div>' +
+    '</div></section>';
+}
+
+function lifeLine(r){ return r.age >= LIFE ? 'প্রতিটা দিনই এখন বোনাস 🎁' : 'জীবনের ' + fmt(r.lifePct) + '% পার — সেরা অংশটা এখনো বাকি ✨'; }
+function cardData(r){
+  return {
+    name: r.v.name.toUpperCase(), meta: r.age + ' বছর · ' + r.v.city,
+    stats: [
+      {e:'☕', v:fmt(r.teaCups), l:'Cups of Tea'},
+      {e:'📱', v:durEn(r.socialH), l:'Social Media'},
+      {e:'🚌', v:durEn(r.commuteH), l:'Commuting'},
+      {e:'😴', v:durEn(r.sleepH), l:'Sleeping'}
+    ],
+    score: r.score.total, persona: PERSONAS[r.persona].t,
+    life: lifeLine(r), lifePct: r.lifePct,
+    quote: '“সংখ্যাগুলো মজার, কিন্তু সময়টা সত্যি।”', url: 'amarjibonerhisab.com'
+  };
+}
+
+var ICON_WA = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>';
+var ICON_FB = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-7.5H16l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4a21 21 0 0 0-2.3-.1c-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.4V21h3.1Z"/></svg>';
+var ICON_DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>';
+
+function secShare(r){
+  var d = cardData(r), P = PERSONAS[r.persona];
+  var stats = d.stats.map(function(s){ return '<div class="lc-s"><div class="e" aria-hidden="true">' + s.e + '</div><b>' + esc(s.v) + '</b><span>' + s.l + '</span></div>'; }).join('');
+  return '<section class="sec anim" id="share" aria-labelledby="sh-title"><div class="wrap">' +
+    '<div class="sec-head rv"><span class="eyebrow">Share</span><h2 id="sh-title">আপনার Life Card তৈরি! 📸</h2><p>বন্ধুদের দেখান — দেখি কার score বেশি! 😄</p></div>' +
+    '<div class="share-wrap"><div class="lcard rv" id="lifeCard" aria-label="শেয়ারযোগ্য Life Card">' +
+    '<div class="lc-brand"><svg class="flag" aria-hidden="true"><use href="#flag"/></svg>আমার জীবনের হিসাব</div>' +
+    '<div class="lc-name">' + esc(d.name) + '</div><div class="lc-meta">' + esc(d.meta) + '</div>' +
+    '<div class="lc-grid">' + stats + '</div>' +
+    '<div class="lc-score"><div><small>LIFE SCORE</small><div class="sv">' + d.score + ' <span>/ 100</span></div></div><div class="pr"><small>আপনি একজন</small><b>' + d.persona + '</b></div></div>' +
+    '<div class="lc-life"><p>' + d.life + '</p><div class="lb"><i style="width:' + d.lifePct.toFixed(1) + '%"></i></div></div>' +
+    '<p class="lc-quote">' + d.quote + '</p><p class="lc-url">' + d.url + '</p></div>' +
+    '<div class="share-side rv" style="--d:.1s"><h3>📤 আমার রিপোর্ট শেয়ার করুন</h3><p>ছবি + caption রেডি — শুধু Facebook-এ পোস্ট করবেন।</p>' +
+    '<div class="share-btns">' +
+    '<button type="button" class="btn btn-fb" id="btnFb">' + ICON_FB + 'Facebook-এ শেয়ার করুন</button>' +
+    '<button type="button" class="btn btn-ghost" id="btnDownload">' + ICON_DL + 'রিপোর্ট Download করুন</button></div>' +
+    '<div class="share-mini">' +
+    '<a class="btn btn-ghost" id="btnWa" target="_blank" rel="noopener">' + ICON_WA + 'WhatsApp</a>' +
+    '<button type="button" class="btn btn-ghost" id="btnChallenge">🤝 চ্যালেঞ্জ</button>' +
+    '<button type="button" class="btn btn-ghost" id="btnShare">📤 অন্যান্য</button></div>' +
+    '<p class="tag-hint">👉 পোস্টে tag করুন ' + P.tag + '! 😄</p>' +
+    '<div class="caption"><div class="caption-h"><span>📝 পোস্টের caption</span><button type="button" id="btnCopy">Copy</button></div>' +
+    '<textarea id="captionText" aria-label="পোস্টের caption">' + esc(caption(r)) + '</textarea></div>' +
+    '<p class="steps-hint">Computer থেকে: ছবি download হবে আর caption কপি হবে → Facebook-এ নতুন পোস্টে ছবি যোগ করে caption paste করুন। কিছু কাজ না করলে কার্ডটার screenshot নিন 📸</p>' +
+    '</div></div></div></section>';
+}
+function secAgain(){
+  return '<section class="again"><div class="wrap"><div class="again-box"><h3>অন্য কারো হিসাব করতে চান?</h3><p>বন্ধু, ভাই-বোন বা বাবা-মায়ের জীবনের হিসাবটাও দেখুন!</p>' +
+    '<div class="again-btns"><button type="button" class="btn btn-ghost" id="btnEdit">✏️ তথ্য বদলে আবার হিসাব</button><button type="button" class="btn btn-green" id="btnReset">↺ নতুন করে শুরু করুন</button></div></div></div></section>';
+}
+
+/* ================= Render + animations ================= */
+var current = null, cardBlob = null, io = null;
+function render(r){
+  current = r; cardBlob = null;
+  var box = $('#results');
+  box.innerHTML = secReport(r) + secDiscover(r) + secScore(r) + secDay(r) + secMoment(r) + secShare(r) + secAgain();
+  box.hidden = false;
+  setupAnims(box); bindResults(r); updateSticky();
+  requestAnimationFrame(function(){
+    scrollToEl($('#report'));
+    try { $('#res-title').focus({preventScroll: true}); } catch (e) {}
+  });
+  prepareBlob(r);
+}
+function runCount(el){
+  var to = parseFloat(el.dataset.to) || 0, dec = parseInt(el.dataset.dec, 10) || 0;
+  if (REDUCED){ el.textContent = fmt(to, dec); return; }
+  var t0 = performance.now(), D = 1400;
+  (function step(t){
+    var p = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - p, 3);
+    el.textContent = fmt(to * e, dec);
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+function activate(sec){
+  if (sec.classList.contains('in')) return;
+  sec.classList.add('in');
+  $$('.cu', sec).forEach(runCount);
+}
+function setupAnims(box){
+  if (io) io.disconnect();
+  var secs = $$('.anim', box);
+  if (!('IntersectionObserver' in window)){ secs.forEach(activate); return; }
+  io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if (en.isIntersecting){ activate(en.target); io.unobserve(en.target); } });
+  }, {threshold: 0.05, rootMargin: '0px 0px -8% 0px'});
+  secs.forEach(function(s){ io.observe(s); });
+}
+
+/* ================= Share ================= */
+function shareUrl(){ return /^https?:/.test(location.protocol) ? location.origin + location.pathname : 'https://amarjibonerhisab.com'; }
+function caption(r){
+  var P = PERSONAS[r.persona];
+  var par = r.par && !r.par.gone && r.par.pLeft > 0 ? '\n🤍 আর জানলাম, বাবা-মায়ের সাথে সময়টা যতটা ভাবি, তার চেয়ে অনেক কম। আজই একবার ফোন করব।\n' : '';
+  return 'আমার জীবনের হিসাব বের করলাম 😅\n\n' +
+    '☕ ' + fmt(r.teaCups) + ' কাপ চা\n' +
+    '📱 ' + durTxt(r.mobileH) + ' মোবাইলে\n' +
+    '🚌 ' + durTxt(r.commuteH) + ' রাস্তায়\n' +
+    '😴 ' + durTxt(r.sleepH) + ' ঘুমে\n\n' +
+    '⭐ Life Score: ' + r.score.total + '/100 — ' + P.t + '\n' + par + '\n' +
+    'সংখ্যাগুলো মজার, কিন্তু সময়টা সত্যি। ❤️\n' +
+    'তোমার score কত? কমেন্টে জানাও 👇\n\n' +
+    '#আমারজীবনেরহিসাব #LifeScore\n' + shareUrl();
+}
+function challengeText(r){
+  return 'আমার Life Score ' + r.score.total + '/100 — আমি একজন ' + PERSONAS[r.persona].t + ' 😎\nতোমার জীবনের হিসাবটা কেমন? দেখি আমাকে হারাতে পারো কিনা 👉 ' + shareUrl();
+}
+function capText(){ var t = $('#captionText'); return t ? t.value : caption(current); }
+
+function bindResults(r){
+  $('#btnFb').addEventListener('click', shareFacebook);
+  $('#btnDownload').addEventListener('click', function(){ doDownload(true); });
+  $('#btnShare').addEventListener('click', shareOther);
+  $('#btnChallenge').addEventListener('click', shareChallenge);
+  $('#btnCopy').addEventListener('click', function(){ copyFallback(capText(), 'Caption কপি হয়েছে 📋'); });
+  $('#btnWa').href = 'https://wa.me/?text=' + encodeURIComponent(challengeText(r));
+  $('#btnEdit').addEventListener('click', function(){ idx = 0; renderStep('back', false); scrollToEl($('#form-sec')); });
+  $('#btnReset').addEventListener('click', resetAll);
+}
+function copyText(text){
+  if (navigator.clipboard && window.isSecureContext){
+    var timeout = new Promise(function(res){ setTimeout(function(){ res('timeout'); }, 1200); });
+    return Promise.race([navigator.clipboard.writeText(text).then(function(){ return true; }), timeout])
+      .then(function(v){ return v === true ? true : legacyCopy(text); }, function(){ return legacyCopy(text); });
+  }
+  return Promise.resolve(legacyCopy(text));
+}
+function legacyCopy(text){
+  try {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;font-size:16px';
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+    var ok = document.execCommand('copy'); document.body.removeChild(ta); return ok;
+  } catch (e){ return false; }
+}
+function copyFallback(text, msg){
+  copyText(text).then(function(ok){
+    if (ok) toast(msg || 'লেখাটা কপি হয়েছে! যেকোনো জায়গায় paste করুন 📋');
+    else { toast('নিচের caption-টা select করে copy করুন'); var ta = $('#captionText'); if (ta){ ta.focus(); ta.select(); } }
+  });
+}
+function cardFile(){
+  try { if (cardBlob && typeof File === 'function') return new File([cardBlob], 'amar-jiboner-hisab.png', {type: 'image/png'}); } catch (e) {}
+  return null;
+}
+function canShareFile(f){ try { return !!(f && navigator.canShare && navigator.canShare({files: [f]})); } catch (e){ return false; } }
+
+// Phone: native share sheet with the card image (user picks Facebook), caption copied for pasting.
+// Computer: download the card, copy the caption and open Facebook in a new tab.
+function shareFacebook(){
+  var cap = capText(), f = cardFile(), copied = copyText(cap), p = null;
+  if (canShareFile(f)){
+    try { p = navigator.share({files: [f], text: cap, title: 'আমার জীবনের হিসাব'}); } catch (e){ p = null; }
+  }
+  if (p){
+    copied.then(function(ok){ toast(ok ? 'Caption কপি হয়েছে ✅ Facebook বেছে নিন, তারপর paste করুন' : 'Facebook বেছে নিন 📘', 5000); });
+    p.catch(function(err){ if (!err || err.name !== 'AbortError') desktopFacebook(copied); });
+    return;
+  }
+  desktopFacebook(copied);
+}
+function desktopFacebook(copied){
+  try { window.open('https://www.facebook.com/', '_blank', 'noopener'); } catch (e) {}
+  doDownload(false);
+  copied.then(function(ok){ toast('ছবি download ✅ ' + (ok ? 'caption কপি ✅ ' : '') + '— Facebook-এ ছবি যোগ করে caption paste করুন', 6500); });
+}
+function shareOther(){
+  var cap = capText(), f = cardFile(), p = null;
+  try {
+    if (canShareFile(f)) p = navigator.share({files: [f], title: 'আমার জীবনের হিসাব', text: cap});
+    else if (navigator.share) p = navigator.share({title: 'আমার জীবনের হিসাব', text: cap});
+  } catch (e){ p = null; }
+  if (p){ p.catch(function(err){ if (!err || err.name !== 'AbortError') copyFallback(cap); }); return; }
+  copyFallback(cap);
+}
+function shareChallenge(){
+  var t = challengeText(current), msg = 'চ্যালেঞ্জ মেসেজ কপি হয়েছে — বন্ধুকে পাঠান 🤝', p = null;
+  try { if (navigator.share) p = navigator.share({title: 'আমার জীবনের হিসাব', text: t}); } catch (e){ p = null; }
+  if (p){ p.catch(function(err){ if (!err || err.name !== 'AbortError') copyFallback(t, msg); }); return; }
+  copyFallback(t, msg);
+}
+function doDownload(withToast){
+  var go = function(blob){
+    if (!blob){ toast('Download করা গেল না — কার্ডটার screenshot নিন 📸'); return; }
+    try {
+      var url = URL.createObjectURL(blob), a = document.createElement('a');
+      a.href = url; a.download = 'amar-jiboner-hisab-' + (current.v.name.replace(/[^\p{L}\p{N}]+/gu, '-').toLowerCase() || 'report') + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      if (withToast) toast('Life Card download হচ্ছে 📥');
+    } catch (e){ toast('Download করা গেল না — কার্ডটার screenshot নিন 📸'); }
+  };
+  if (cardBlob) go(cardBlob); else makeBlob(current).then(go);
+}
+function prepareBlob(r){ makeBlob(r).then(function(b){ if (current === r) cardBlob = b; }); }
+function makeBlob(r){
+  var fontsReady = (document.fonts && document.fonts.load) ? Promise.all([
+    document.fonts.load('800 80px "Plus Jakarta Sans"'), document.fonts.load('700 40px "Hind Siliguri"', 'আমার'), document.fonts.load('500 40px "Hind Siliguri"', 'জীবন')
+  ]).catch(function(){}) : Promise.resolve();
+  return fontsReady.then(function(){
+    return new Promise(function(res){
+      try {
+        var c = drawCard(cardData(r));
+        if (c.toBlob) c.toBlob(function(b){ res(b || null); }, 'image/png');
+        else res(dataUrlToBlob(c.toDataURL('image/png')));
+      } catch (e){ res(null); }
+    });
+  });
+}
+function dataUrlToBlob(u){
+  var p = u.split(','), bin = atob(p[1]), arr = new Uint8Array(bin.length);
+  for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+  return new Blob([arr], {type: 'image/png'});
+}
+
+/* ---- Canvas card: 1080×1350 (4:5, ideal for Facebook / Instagram feed) ---- */
+function rr(x, X, Y, W, H, R){
+  x.beginPath(); x.moveTo(X + R, Y); x.arcTo(X + W, Y, X + W, Y + H, R); x.arcTo(X + W, Y + H, X, Y + H, R);
+  x.arcTo(X, Y + H, X, Y, R); x.arcTo(X, Y, X + W, Y, R); x.closePath();
+}
+var F = '"Plus Jakarta Sans","Hind Siliguri",system-ui,sans-serif';
+function fitText(x, text, weight, size, maxW, minSize){
+  var s = size; x.font = weight + ' ' + s + 'px ' + F;
+  while (x.measureText(text).width > maxW && s > minSize){ s -= 2; x.font = weight + ' ' + s + 'px ' + F; }
+  if (x.measureText(text).width > maxW){
+    while (text.length > 1 && x.measureText(text + '…').width > maxW) text = text.slice(0, -1);
+    text += '…';
+  }
+  return text;
+}
+function glow(x, cx, cy, rad, col){
+  var g = x.createRadialGradient(cx, cy, 0, cx, cy, rad); g.addColorStop(0, col); g.addColorStop(1, 'rgba(0,0,0,0)');
+  x.fillStyle = g; x.fillRect(cx - rad, cy - rad, rad * 2, rad * 2);
+}
+function drawCard(d){
+  var W = 1080, H = 1350, P = 80, c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  var x = c.getContext('2d');
+  var g = x.createLinearGradient(0, 0, W, H);
+  g.addColorStop(0, '#0b1f5c'); g.addColorStop(.55, '#1e3a8a'); g.addColorStop(1, '#0b5d47');
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  glow(x, 1000, 80, 560, 'rgba(18,184,134,.45)');
+  glow(x, 0, 1350, 600, 'rgba(245,158,11,.28)');
+
+  x.fillStyle = '#006a4e'; rr(x, P, 78, 72, 48, 10); x.fill();
+  x.fillStyle = '#e5243b'; x.beginPath(); x.arc(P + 32, 102, 14.5, 0, Math.PI * 2); x.fill();
+  x.fillStyle = '#fff'; x.font = '600 42px ' + F; x.fillText('আমার জীবনের হিসাব', P + 98, 117);
+
+  x.fillStyle = '#fff'; x.fillText(fitText(x, d.name, '800', 86, W - P * 2, 52), P, 262);
+  x.fillStyle = 'rgba(255,255,255,.78)'; x.fillText(fitText(x, d.meta, '500', 40, W - P * 2, 30), P, 320);
+
+  var gap = 26, bw = (W - P * 2 - gap) / 2, bh = 184, y0 = 362;
+  d.stats.forEach(function(s, i){
+    var bx = P + (i % 2) * (bw + gap), by = y0 + Math.floor(i / 2) * (bh + gap);
+    x.fillStyle = 'rgba(255,255,255,.09)'; rr(x, bx, by, bw, bh, 40); x.fill();
+    x.strokeStyle = 'rgba(255,255,255,.13)'; x.lineWidth = 2; x.stroke();
+    x.fillStyle = '#fff'; x.font = '46px ' + F; x.fillText(s.e, bx + 36, by + 68);
+    x.fillText(fitText(x, s.v, '800', 54, bw - 72, 34), bx + 36, by + 132);
+    x.fillStyle = 'rgba(255,255,255,.75)'; x.font = '500 31px ' + F; x.fillText(s.l, bx + 36, by + 168);
+  });
+
+  var sy = y0 + bh * 2 + gap + 30, sh = 206;
+  x.fillStyle = 'rgba(255,255,255,.97)'; rr(x, P, sy, W - P * 2, sh, 44); x.fill();
+  x.fillStyle = '#64748b'; x.font = '700 27px ' + F; x.fillText('LIFE SCORE', P + 46, sy + 60);
+  x.fillStyle = '#1e3a8a'; x.font = '800 110px ' + F; var sc = String(d.score); x.fillText(sc, P + 42, sy + 170);
+  var sw = x.measureText(sc).width;
+  x.fillStyle = '#94a3b8'; x.font = '700 42px ' + F; x.fillText('/ 100', P + 54 + sw, sy + 170);
+  x.textAlign = 'right';
+  x.fillStyle = '#64748b'; x.font = '600 29px ' + F; x.fillText('আপনি একজন', W - P - 46, sy + 88);
+  x.fillStyle = '#006a4e'; x.fillText(fitText(x, d.persona, '800', 46, 430, 30), W - P - 46, sy + 148);
+  x.textAlign = 'left';
+
+  var ly = sy + sh + 60;
+  x.fillStyle = '#fff'; x.fillText(fitText(x, d.life, '600', 34, W - P * 2, 24), P, ly);
+  x.fillStyle = 'rgba(255,255,255,.15)'; rr(x, P, ly + 20, W - P * 2, 14, 7); x.fill();
+  var lg = x.createLinearGradient(P, 0, W - P, 0); lg.addColorStop(0, '#7ee0f0'); lg.addColorStop(1, '#9be8c9');
+  x.fillStyle = lg; rr(x, P, ly + 20, Math.max(14, (W - P * 2) * d.lifePct / 100), 14, 7); x.fill();
+
+  x.textAlign = 'center';
+  x.fillStyle = 'rgba(255,255,255,.9)'; x.fillText(fitText(x, d.quote, '500', 36, W - P * 2, 26), W / 2, H - 104);
+  x.fillStyle = 'rgba(255,255,255,.6)'; x.font = '600 29px ' + F; x.fillText(d.url, W / 2, H - 56);
+  x.textAlign = 'left';
+  return c;
+}
+
+/* ================= Reset ================= */
+function resetAll(){
+  S = {}; idx = 0;
+  if (io) io.disconnect();
+  current = null; cardBlob = null;
+  var box = $('#results'); box.innerHTML = ''; box.hidden = true;
+  renderStep('back', false); updateSticky();
+  scrollToEl($('#form-sec'));
+  setTimeout(function(){ try { $('#qInput').focus({preventScroll: true}); } catch (e) {} }, REDUCED ? 0 : 600);
+  toast('সব মুছে ফেলা হয়েছে — নতুন করে শুরু করুন ✨');
+}
+
+/* ================= Sticky CTA (mobile) ================= */
+var vis = {hero: true, form: false, share: false};
+var sticky = $('#sticky'), stickyBtn = $('#stickyBtn');
+function updateSticky(){
+  var show;
+  if (current){
+    show = !vis.share && !vis.form && !vis.hero && !!$('#share');
+    stickyBtn.innerHTML = ICON_FB + 'আমার Life Card শেয়ার করুন';
+    stickyBtn.className = 'btn btn-fb';
+    stickyBtn.setAttribute('href', '#share');
+  } else {
+    show = !vis.hero && !vis.form;
+    stickyBtn.textContent = '✨ আমার জীবনের হিসাব করুন';
+    stickyBtn.className = 'btn btn-primary';
+    stickyBtn.setAttribute('href', '#form-sec');
+  }
+  sticky.classList.toggle('show', show);
+  sticky.setAttribute('aria-hidden', show ? 'false' : 'true');
+  stickyBtn.tabIndex = show ? 0 : -1;
+}
+if ('IntersectionObserver' in window){
+  var so = new IntersectionObserver(function(ents){
+    ents.forEach(function(en){ vis[en.target.dataset.watch] = en.isIntersecting; });
+    updateSticky();
+  }, {threshold: 0});
+  $('#heroCta').dataset.watch = 'hero'; so.observe($('#heroCta'));
+  form.dataset.watch = 'form'; so.observe(form);
+  new MutationObserver(function(){
+    var s = $('#share'); vis.share = false;
+    if (s){ s.dataset.watch = 'share'; so.observe(s); }
+  }).observe($('#results'), {childList: true});
+}
+function goQuiz(e){
+  e.preventDefault();
+  scrollToEl($('#form-sec'));
+  setTimeout(function(){ try { (STEPS[idx].type === 'text' || STEPS[idx].type === 'year' ? $('#qInput') : $('#qTitle')).focus({preventScroll: true}); } catch (er) {} }, REDUCED ? 0 : 650);
+}
+stickyBtn.addEventListener('click', function(e){
+  if (current){ e.preventDefault(); scrollToEl($('#share')); } else goQuiz(e);
+});
+$('#heroCta').addEventListener('click', goQuiz);
+
+renderStep('fwd', false);
+window.__lifeCalc = {compute: compute, parseNum: parseNum, dur: dur, money: money};
+})();
+</script>
+</body>
+</html>
