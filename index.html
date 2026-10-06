@@ -320,29 +320,9 @@ section{scroll-margin-top:12px}
 .share-wrap{display:grid;gap:28px;align-items:start;justify-items:center}
 .share-wrap>*{min-width:0}
 @media (min-width:860px){.share-wrap{grid-template-columns:420px 1fr;justify-items:stretch}}
-.lcard{container-type:inline-size;width:100%;max-width:420px;aspect-ratio:4/5;border-radius:28px;color:#fff;position:relative;overflow:hidden;box-shadow:var(--sh-3);background:radial-gradient(60% 45% at 95% 5%,rgba(18,184,134,.45),transparent 70%),radial-gradient(55% 40% at 0% 100%,rgba(245,158,11,.28),transparent 70%),linear-gradient(155deg,#0b1f5c,#1e3a8a 55%,#0b5d47);display:flex;flex-direction:column;padding:7.4cqw}
-.lc-brand{display:flex;align-items:center;gap:2.6cqw;font-weight:600;font-size:3.9cqw}
-.lc-brand .flag{width:6.6cqw;height:4.4cqw;border-radius:1cqw}
-.lc-name{margin-top:4.6cqw;font-size:8cqw;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lc-meta{margin-top:.4cqw;font-size:3.7cqw;opacity:.78;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lc-grid{margin-top:3.6cqw;display:grid;grid-template-columns:1fr 1fr;gap:2.4cqw}
-.lc-s{padding:2.8cqw 3.4cqw;border-radius:4cqw;background:rgba(255,255,255,.09);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);min-width:0}
-.lc-s .e{font-size:4.2cqw;line-height:1}
-.lc-s b{display:block;margin-top:1.2cqw;font-size:5cqw;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lc-s span{display:block;font-size:2.9cqw;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lc-score{margin-top:2.8cqw;display:flex;align-items:center;justify-content:space-between;gap:3cqw;padding:3cqw 4.2cqw;border-radius:4.2cqw;background:rgba(255,255,255,.96);color:var(--ink)}
-.lc-score small{display:block;font-size:2.5cqw;font-weight:700;letter-spacing:.1em;color:#64748b}
-.lc-score .sv{font-size:9.6cqw;font-weight:800;line-height:1;color:var(--blue-700);letter-spacing:-.03em}
-.lc-score .sv span{font-size:3.9cqw;color:#94a3b8;font-weight:700;letter-spacing:0}
-.lc-score .pr{text-align:right;min-width:0}
-.lc-score .pr small{letter-spacing:0;font-weight:600;font-size:2.7cqw}
-.lc-score .pr b{display:block;font-size:4.2cqw;color:var(--green-700);font-weight:800;line-height:1.25}
-.lc-life{margin-top:4cqw}
-.lc-life p{font-size:3.2cqw;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lc-life .lb{margin-top:1.4cqw;height:1.3cqw;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden}
-.lc-life .lb i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7ee0f0,#9be8c9)}
-.lc-quote{margin-top:auto;text-align:center;font-size:3.3cqw;opacity:.9;font-weight:500;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.lc-url{margin-top:1cqw;text-align:center;font-size:2.8cqw;opacity:.6;font-weight:600}
+.lcard{width:100%;max-width:420px;aspect-ratio:4/5;border-radius:28px;overflow:hidden;box-shadow:var(--sh-3);background:linear-gradient(155deg,#0b1f5c,#1e3a8a 55%,#0b5d47);display:grid;place-items:center;color:rgba(255,255,255,.75);font-weight:600}
+.lcard img{width:100%;height:100%;object-fit:cover;-webkit-touch-callout:default}
+.card-tip{margin-top:10px;text-align:center;font-size:.84rem;color:var(--ink-3)}
 .share-side{width:100%;max-width:420px}
 @media (min-width:860px){.share-side{max-width:none}}
 .share-side h3{font-size:1.45rem}
@@ -553,7 +533,7 @@ function react(k, v){
 function optsHTML(k, unit, label, opts, cur, cls){
   return '<div class="opts' + (cls ? ' ' + cls : '') + '" role="radiogroup" aria-label="' + esc(label) + '">' + opts.map(function(o){
     var v = typeof o === 'object' ? o.v : o;
-    var l = typeof o === 'object' ? o.l : fmtH(o) + (unit ? '<small>' + unit + '</small>' : '');
+    var l = typeof o === 'object' ? o.l : typeof o === 'string' ? esc(o) : fmtH(o) + (unit ? '<small>' + unit + '</small>' : '');
     return '<button type="button" class="opt" role="radio" data-k="' + k + '" data-v="' + esc(v) + '" aria-checked="' + (cur === v) + '">' + l + '</button>';
   }).join('') + '</div>';
 }
@@ -1040,6 +1020,19 @@ function secMoment(r){
 }
 
 function lifeLine(r){ return r.age >= LIFE ? 'প্রতিটা দিনই এখন বোনাস 🎁' : 'জীবনের ' + fmt(r.lifePct) + '% পার — সেরা অংশটা এখনো বাকি ✨'; }
+// The emotional line on the share card — what makes friends curious about their own number
+function heartLine(r){
+  var P = r.par;
+  if (P && P.gone) return {t: '🤍 যাঁরা পাশে নেই, তাঁরা প্রতিটা হিসাবেই আছেন', n: ''};
+  if (P && P.pLeft > 0) return {t: '🤍 মা-বাবার সাথে সামনে হয়তো আর ', n: '~' + fmt(P.ahead) + ' দিন'};
+  if (P) return {t: '🤍 মা-বাবার সাথে প্রতিটা দিনই এখন উপহার', n: ''};
+  return {t: '❤️ সংখ্যাগুলো মজার, কিন্তু সময়টা সত্যি', n: ''};
+}
+function lifeDots(age){
+  var total = Math.max(LIFE, age + 1), out = [];
+  for (var i = 0; i < total && i < 100; i++) out.push(i < age ? (i >= LIFE ? 'l bonus' : 'l') : (i === age ? 'now' : ''));
+  return out;
+}
 function cardData(r){
   return {
     name: r.v.name.toUpperCase(), meta: r.age + ' বছর · ' + r.v.city,
@@ -1050,8 +1043,8 @@ function cardData(r){
       {e:'😴', v:durEn(r.sleepH), l:'Sleeping'}
     ],
     score: r.score.total, persona: PERSONAS[r.persona].t,
-    life: lifeLine(r), lifePct: r.lifePct,
-    quote: '“সংখ্যাগুলো মজার, কিন্তু সময়টা সত্যি।”', url: 'amarjibonerhisab.com'
+    life: lifeLine(r), lifePct: r.lifePct, age: r.age,
+    heart: heartLine(r)
   };
 }
 
@@ -1060,17 +1053,11 @@ var ICON_FB = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><
 var ICON_DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14"/></svg>';
 
 function secShare(r){
-  var d = cardData(r), P = PERSONAS[r.persona];
-  var stats = d.stats.map(function(s){ return '<div class="lc-s"><div class="e" aria-hidden="true">' + s.e + '</div><b>' + esc(s.v) + '</b><span>' + s.l + '</span></div>'; }).join('');
+  var P = PERSONAS[r.persona];
   return '<section class="sec anim" id="share" aria-labelledby="sh-title"><div class="wrap">' +
     '<div class="sec-head rv"><span class="eyebrow">Share</span><h2 id="sh-title">আপনার Life Card তৈরি! 📸</h2><p>বন্ধুদের দেখান — দেখি কার score বেশি! 😄</p></div>' +
-    '<div class="share-wrap"><div class="lcard rv" id="lifeCard" aria-label="শেয়ারযোগ্য Life Card">' +
-    '<div class="lc-brand"><svg class="flag" aria-hidden="true"><use href="#flag"/></svg>আমার জীবনের হিসাব</div>' +
-    '<div class="lc-name">' + esc(d.name) + '</div><div class="lc-meta">' + esc(d.meta) + '</div>' +
-    '<div class="lc-grid">' + stats + '</div>' +
-    '<div class="lc-score"><div><small>LIFE SCORE</small><div class="sv">' + d.score + ' <span>/ 100</span></div></div><div class="pr"><small>আপনি একজন</small><b>' + d.persona + '</b></div></div>' +
-    '<div class="lc-life"><p>' + d.life + '</p><div class="lb"><i style="width:' + d.lifePct.toFixed(1) + '%"></i></div></div>' +
-    '<p class="lc-quote">' + d.quote + '</p><p class="lc-url">' + d.url + '</p></div>' +
+    '<div class="share-wrap"><div class="rv"><div class="lcard" id="lifeCard"><span>Card তৈরি হচ্ছে… ✨</span></div>' +
+    '<p class="card-tip">📱 ফোনে ছবিটা চেপে ধরে রেখেও Save করতে পারবেন</p></div>' +
     '<div class="share-side rv" style="--d:.1s"><h3>📤 আমার রিপোর্ট শেয়ার করুন</h3><p>ছবি + caption রেডি — শুধু Facebook-এ পোস্ট করবেন।</p>' +
     '<div class="share-btns">' +
     '<button type="button" class="btn btn-fb" id="btnFb">' + ICON_FB + 'Facebook-এ শেয়ার করুন</button>' +
@@ -1234,7 +1221,18 @@ function doDownload(withToast){
   };
   if (cardBlob) go(cardBlob); else makeBlob(current).then(go);
 }
-function prepareBlob(r){ makeBlob(r).then(function(b){ if (current === r) cardBlob = b; }); }
+function prepareBlob(r){
+  makeBlob(r).then(function(b){
+    if (current !== r) return;
+    cardBlob = b;
+    var box = $('#lifeCard'); if (!box) return;
+    if (!b){ box.innerHTML = '<span>Card দেখানো গেল না — রিপোর্টের screenshot নিন 📸</span>'; return; }
+    var img = new Image();
+    img.alt = r.v.name + '-এর Life Card: Life Score ' + r.score.total + '/100, ' + PERSONAS[r.persona].t;
+    img.src = URL.createObjectURL(b);
+    box.innerHTML = ''; box.appendChild(img);
+  });
+}
 function makeBlob(r){
   var fontsReady = (document.fonts && document.fonts.load) ? Promise.all([
     document.fonts.load('800 80px "Plus Jakarta Sans"'), document.fonts.load('700 40px "Hind Siliguri"', 'আমার'), document.fonts.load('500 40px "Hind Siliguri"', 'জীবন')
@@ -1291,37 +1289,58 @@ function drawCard(d){
   x.fillStyle = '#fff'; x.fillText(fitText(x, d.name, '800', 86, W - P * 2, 52), P, 262);
   x.fillStyle = 'rgba(255,255,255,.78)'; x.fillText(fitText(x, d.meta, '500', 40, W - P * 2, 30), P, 320);
 
-  var gap = 26, bw = (W - P * 2 - gap) / 2, bh = 184, y0 = 362;
+  var gap = 24, bw = (W - P * 2 - gap) / 2, bh = 164, y0 = 350;
   d.stats.forEach(function(s, i){
     var bx = P + (i % 2) * (bw + gap), by = y0 + Math.floor(i / 2) * (bh + gap);
-    x.fillStyle = 'rgba(255,255,255,.09)'; rr(x, bx, by, bw, bh, 40); x.fill();
+    x.fillStyle = 'rgba(255,255,255,.09)'; rr(x, bx, by, bw, bh, 38); x.fill();
     x.strokeStyle = 'rgba(255,255,255,.13)'; x.lineWidth = 2; x.stroke();
-    x.fillStyle = '#fff'; x.font = '46px ' + F; x.fillText(s.e, bx + 36, by + 68);
-    x.fillText(fitText(x, s.v, '800', 54, bw - 72, 34), bx + 36, by + 132);
-    x.fillStyle = 'rgba(255,255,255,.75)'; x.font = '500 31px ' + F; x.fillText(s.l, bx + 36, by + 168);
+    x.fillStyle = '#fff'; x.font = '42px ' + F; x.fillText(s.e, bx + 34, by + 60);
+    x.fillText(fitText(x, s.v, '800', 50, bw - 68, 32), bx + 34, by + 118);
+    x.fillStyle = 'rgba(255,255,255,.75)'; x.font = '500 29px ' + F; x.fillText(s.l, bx + 34, by + 151);
   });
 
-  var sy = y0 + bh * 2 + gap + 30, sh = 206;
-  x.fillStyle = 'rgba(255,255,255,.97)'; rr(x, P, sy, W - P * 2, sh, 44); x.fill();
-  x.fillStyle = '#64748b'; x.font = '700 27px ' + F; x.fillText('LIFE SCORE', P + 46, sy + 60);
-  x.fillStyle = '#1e3a8a'; x.font = '800 110px ' + F; var sc = String(d.score); x.fillText(sc, P + 42, sy + 170);
+  // score
+  var sy = y0 + bh * 2 + gap + 24, sh = 176;
+  x.fillStyle = 'rgba(255,255,255,.97)'; rr(x, P, sy, W - P * 2, sh, 40); x.fill();
+  x.fillStyle = '#64748b'; x.font = '700 25px ' + F; x.fillText('LIFE SCORE', P + 44, sy + 52);
+  x.fillStyle = '#1e3a8a'; x.font = '800 96px ' + F; var sc = String(d.score); x.fillText(sc, P + 40, sy + 148);
   var sw = x.measureText(sc).width;
-  x.fillStyle = '#94a3b8'; x.font = '700 42px ' + F; x.fillText('/ 100', P + 54 + sw, sy + 170);
+  x.fillStyle = '#94a3b8'; x.font = '700 38px ' + F; x.fillText('/ 100', P + 52 + sw, sy + 148);
   x.textAlign = 'right';
-  x.fillStyle = '#64748b'; x.font = '600 29px ' + F; x.fillText('আপনি একজন', W - P - 46, sy + 88);
-  x.fillStyle = '#006a4e'; x.fillText(fitText(x, d.persona, '800', 46, 430, 30), W - P - 46, sy + 148);
+  x.fillStyle = '#64748b'; x.font = '600 27px ' + F; x.fillText('আপনি একজন', W - P - 44, sy + 76);
+  x.fillStyle = '#006a4e'; x.fillText(fitText(x, d.persona, '800', 44, 440, 28), W - P - 44, sy + 132);
   x.textAlign = 'left';
 
-  var ly = sy + sh + 60;
-  x.fillStyle = '#fff'; x.fillText(fitText(x, d.life, '600', 34, W - P * 2, 24), P, ly);
-  x.fillStyle = 'rgba(255,255,255,.15)'; rr(x, P, ly + 20, W - P * 2, 14, 7); x.fill();
-  var lg = x.createLinearGradient(P, 0, W - P, 0); lg.addColorStop(0, '#7ee0f0'); lg.addColorStop(1, '#9be8c9');
-  x.fillStyle = lg; rr(x, P, ly + 20, Math.max(14, (W - P * 2) * d.lifePct / 100), 14, 7); x.fill();
+  // emotional block: life calendar + heart line
+  var ey = sy + sh + 24, eh = 262, pad = 40, innerW = W - P * 2 - pad * 2;
+  x.fillStyle = 'rgba(255,255,255,.08)'; rr(x, P, ey, W - P * 2, eh, 40); x.fill();
+  x.strokeStyle = 'rgba(255,255,255,.12)'; x.lineWidth = 2; x.stroke();
+  x.fillStyle = '#fff'; x.fillText(fitText(x, d.life, '600', 32, innerW, 22), P + pad, ey + 56);
+  var dots = lifeDots(d.age), cols = Math.max(25, Math.ceil(dots.length / 3)), cell = innerW / cols, rad = cell * 0.36;
+  dots.forEach(function(cls, i){
+    var cx = P + pad + (i % cols) * cell + cell / 2, cy = ey + 92 + Math.floor(i / cols) * cell + cell / 2;
+    if (cls === 'now'){ x.fillStyle = 'rgba(255,210,122,.3)'; x.beginPath(); x.arc(cx, cy, rad + 5, 0, Math.PI * 2); x.fill(); }
+    x.fillStyle = cls === 'now' ? '#ffd27a' : cls.indexOf('bonus') >= 0 ? '#ffb27a' : cls ? '#9be8c9' : 'rgba(255,255,255,.16)';
+    x.beginPath(); x.arc(cx, cy, rad, 0, Math.PI * 2); x.fill();
+  });
+  var hy = ey + eh - 34;
+  x.font = '800 34px ' + F;
+  var nw = d.heart.n ? x.measureText(d.heart.n).width : 0;
+  var ht = fitText(x, d.heart.t, '600', 32, innerW - nw, 22);
+  x.fillStyle = '#ffd6e0'; x.fillText(ht, P + pad, hy);
+  if (d.heart.n){
+    var tw = x.measureText(ht).width;
+    x.fillStyle = '#ffd27a'; x.font = '800 34px ' + F; x.fillText(d.heart.n, P + pad + tw, hy);
+  }
 
-  x.textAlign = 'center';
-  x.fillStyle = 'rgba(255,255,255,.9)'; x.fillText(fitText(x, d.quote, '500', 36, W - P * 2, 26), W / 2, H - 104);
-  x.fillStyle = 'rgba(255,255,255,.6)'; x.font = '600 29px ' + F; x.fillText(d.url, W / 2, H - 56);
-  x.textAlign = 'left';
+  // curiosity CTA (no URL)
+  var cy2 = H - 70, lead = 'আপনার জীবনের হিসাবটা কত? 🤔', tag = '#আমারজীবনেরহিসাব';
+  x.font = '600 30px ' + F; var lw = x.measureText(lead).width;
+  x.font = '800 30px ' + F; var uw = x.measureText(tag).width;
+  var total = lw + 18 + uw + 44, sx = (W - total) / 2;
+  x.fillStyle = 'rgba(255,255,255,.85)'; x.font = '600 30px ' + F; x.fillText(lead, sx, cy2 + 10);
+  x.fillStyle = '#fff'; rr(x, sx + lw + 18, cy2 - 28, uw + 44, 54, 27); x.fill();
+  x.fillStyle = '#13296b'; x.font = '800 30px ' + F; x.fillText(tag, sx + lw + 40, cy2 + 10);
   return c;
 }
 
